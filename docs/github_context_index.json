@@ -314,5 +314,20 @@
         }
       ]
     }
+  },
+  "layer7": {
+    "frontend": {
+      "screens": [
+        {
+          "name": "Next.config",
+          "file": "next.config.js",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "derived": true
+        }
+      ]
+    }
   }
 }
