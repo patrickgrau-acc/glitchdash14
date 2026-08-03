@@ -1,6 +1,6 @@
 # Game systems integrity audit
 
-Game systems audit: 10 violation(s) (competing_owner×9, undeclared_field×1) across 7 file(s). competing_owner = reassigns state.entities/phase/player/score instead of reading + consuming/emitting events; class_export = `export default class Foo` with no `new Foo()` instance exported — the registry needs an object, not a constructor; undeclared_field = writes to `state.<field>` where <field> isn't declared on GameState (per-mechanic scratch belongs in state.data.<key>). Files: base_player.ts, bypass_death_animation.ts, configure_object_pooling_obstacles.ts, enable_instant_gameplay_restart.ts, manage_engine_state_reset.ts, optimize_collision_detection.ts, start_initial_gameplay_session.ts
+Game systems audit: 11 violation(s) (competing_owner×10, undeclared_field×1) across 8 file(s). competing_owner = reassigns state.entities/phase/player/score instead of reading + consuming/emitting events; class_export = `export default class Foo` with no `new Foo()` instance exported — the registry needs an object, not a constructor; undeclared_field = writes to `state.<field>` where <field> isn't declared on GameState (per-mechanic scratch belongs in state.data.<key>). Files: base_player.ts, bypass_death_animation.ts, configure_object_pooling_obstacles.ts, enable_instant_gameplay_restart.ts, manage_engine_state_reset.ts, optimize_collision_detection.ts, reset_gameplay_state_container.ts, start_initial_gameplay_session.ts
 
 ## Competing-owner writes
 - src/game/systems/base_player.ts:14 `state.player =`
@@ -13,5 +13,6 @@ Game systems audit: 10 violation(s) (competing_owner×9, undeclared_field×1) ac
 - src/game/systems/manage_engine_state_reset.ts:17 `state.score =`
 - src/game/systems/manage_engine_state_reset.ts:19 `state.entities =`
 - src/game/systems/bypass_death_animation.ts:1 `state.phase =`
+- src/game/systems/reset_gameplay_state_container.ts:17 `state.score =`
 
 The core loop owns state.entities, physics, collision, and win/lose. Mechanics must READ state and emit/consume state.events — not reassign state.entities.
