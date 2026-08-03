@@ -16,16 +16,17 @@ import s8 from './configure_intensity_scaling_curve';
 import s9 from './configure_precise_collision_hitbox';
 import s10 from './construct_self_contained_deployment';
 import s11 from './display_live_score_during_gameplay';
-import s12 from './implement_debug_mode_real_time';
-import s13 from './implement_screen_shake_feedback';
-import s14 from './manage_session_progress';
-import s15 from './monitor_performance_for_fairness';
-import s16 from './monitor_player_performance';
-import s17 from './optimize_collision_detection';
-import s18 from './start_initial_gameplay_session';
-import s19 from './validate_character_obstacle_hitbox';
+import s12 from './enable_vertical_dodge_input';
+import s13 from './implement_debug_mode_real_time';
+import s14 from './implement_screen_shake_feedback';
+import s15 from './manage_session_progress';
+import s16 from './monitor_performance_for_fairness';
+import s17 from './monitor_player_performance';
+import s18 from './optimize_collision_detection';
+import s19 from './start_initial_gameplay_session';
+import s20 from './validate_character_obstacle_hitbox';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
