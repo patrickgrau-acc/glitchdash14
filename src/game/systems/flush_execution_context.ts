@@ -137,7 +137,7 @@ const FlushExecutionContextSystem: GameSystem = {
     if (!data) return;
 
     // Optional subtle debug or performance indicator in debug mode
-    if (state.data.debugHitboxes && data.lastFlushDurationMs > 0) {
+    if (state.data.debug?.enabled && data.lastFlushDurationMs > 0) {
       ctx.save();
       ctx.font = '10px Roboto, monospace';
       ctx.fillStyle = 'rgba(0, 255, 200, 0.7)';

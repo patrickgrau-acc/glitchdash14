@@ -45,41 +45,11 @@ const designNeonVaporwaveInterface: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState) {
     if (!state.data.neonVaporwave) return;
-    const nv = state.data.neonVaporwave as NeonVaporwaveState;
 
-    ctx.save();
-
-    // Subtle CRT scanlines and neon vignette framing
-    const width = state.width || 800;
-    const height = state.height || 450;
-
-    // Draw cyberpunk neon framing borders depending on phase
-    if (state.phase === 'ready' || state.phase === 'over') {
-      const pulseAlpha = 0.15 + Math.sin(nv.pulseTimer) * 0.08;
-      ctx.strokeStyle = nv.neonColors.hotPink;
-      ctx.lineWidth = 4;
-      ctx.shadowColor = nv.neonColors.hotPink;
-      ctx.shadowBlur = 12;
-      ctx.strokeRect(12, 12, width - 24, height - 24);
-
-      ctx.strokeStyle = nv.neonColors.electricBlue;
-      ctx.lineWidth = 2;
-      ctx.shadowColor = nv.neonColors.electricBlue;
-      ctx.shadowBlur = 8;
-      ctx.strokeRect(18, 18, width - 36, height - 36);
-
-      // Decorative cyberpunk grid accents in corners
-      ctx.fillStyle = nv.neonColors.limeGreen;
-      ctx.fillRect(12, 12, 16, 4);
-      ctx.fillRect(12, 12, 4, 16);
-      ctx.fillRect(width - 28, 12, 16, 4);
-      ctx.fillRect(width - 16, 12, 4, 16);
-    }
-
-    // Expose computed palette & typography metrics for other systems/inspectors
+    // The neon frame is already GameCanvas.tsx's own CSS border + glow on the
+    // <canvas> element. This system was drawing a SECOND (and third) border
+    // just inside it on ready/over — the "multiple nested boxes" look.
     state.data.neonPaletteActive = true;
-
-    ctx.restore();
   },
 };
 

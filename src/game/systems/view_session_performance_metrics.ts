@@ -59,32 +59,8 @@ const viewSessionPerformanceMetricsSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    // Canvas rendering for supplemental accessible performance HUD overlays if needed,
-    // keeping contrast high to support color vision deficiency compliance (TS-0013, TS-0020, TS-0027).
-    if (state.phase === 'over' && state.data.liveScoreDisplay) {
-      ctx.save();
-      ctx.font = '700 24px Roboto, sans-serif';
-      ctx.fillStyle = '#00E5FF';
-      ctx.textAlign = 'center';
-      
-      const centerX = state.width / 2;
-      const centerY = state.height / 2 + 60;
-
-      // Draw high-contrast accessible session summary badge
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      ctx.fillRect(centerX - 160, centerY - 20, 320, 60);
-      ctx.strokeStyle = '#00E5FF';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(centerX - 160, centerY - 20, 320, 60);
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillText(
-        `Final: ${state.data.liveScoreDisplay.formattedScore} | Best: ${state.data.liveScoreDisplay.formattedBest}`,
-        centerX,
-        centerY + 18
-      );
-      ctx.restore();
-    }
+    // Game-over panel (incl. final/best score) is owned by calculate_display_final_session.ts —
+    // this badge was drawing directly on top of it at the same screen position.
   }
 };
 

@@ -16,7 +16,6 @@ interface Particle {
 
 interface ParticleSystemData {
   particles: Particle[];
-  lastScore: number;
 }
 
 const NEON_COLORS = [
@@ -28,59 +27,45 @@ const NEON_COLORS = [
 ];
 
 /**
- * System to animate neon-colored geometric particle bursts upon obstacle clearance/scoring events.
- * Satisfies TS-0009 by emitting high-contrast particles and cleanly removing them upon expiry.
+ * System to animate neon-colored geometric particle bursts when the player jumps
+ * clear over an obstacle. Satisfies TS-0009 by emitting high-contrast particles
+ * and cleanly removing them upon expiry.
  */
 const animateParticleBurstsSystem: GameSystem = {
   id: 'animate_particle_bursts',
   order: 50,
 
   reset(state: GameState) {
-    const data: ParticleSystemData = {
-      particles: [],
-      lastScore: state.score || 0,
-    };
+    const data: ParticleSystemData = { particles: [] };
     state.data.animateParticleBursts = data;
   },
 
   update(state: GameState, _input: InputState, dt: number) {
     if (!state.data.animateParticleBursts) {
-      state.data.animateParticleBursts = {
-        particles: [],
-        lastScore: state.score || 0,
-      };
+      state.data.animateParticleBursts = { particles: [] };
     }
 
     const data: ParticleSystemData = state.data.animateParticleBursts;
 
-    // Detect score increments or 'score' events in state.events
-    const scoreChanged = state.score > data.lastScore;
-    const scoredViaEvent = state.events.includes('score');
+    // One burst per obstacle cleared this frame (base_player.ts populates this —
+    // was previously firing on every score tick regardless of obstacles).
+    const cleared: Array<{ x: number; y: number; w: number; h: number }> = state.data.clearedObstacles || [];
+    const scrollVx = -(state.data.speed || 0); // drift left with the obstacle so the burst "scrolls off" with it
 
-    if (scoreChanged || scoredViaEvent) {
-      data.lastScore = state.score;
+    for (const o of cleared) {
+      const originX = o.x + o.w / 2;
+      const originY = o.y + o.h / 2;
 
-      // Find Glitch character position or default to near left-center if not found
-      let originX = 120;
-      let originY = state.height ? state.height / 2 : 200;
-
-      const glitchEntity = state.entities.find(e => e.kind === 'player' || e.kind === 'glitch' || e.kind === 'runner');
-      if (glitchEntity) {
-        originX = glitchEntity.x + (glitchEntity.w || 40) / 2;
-        originY = glitchEntity.y + (glitchEntity.h || 40) / 2;
-      }
-
-      // Emit a burst of geometric neon particles (TS-0009)
       const particleCount = 18;
       for (let i = 0; i < particleCount; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 120 + Math.random() * 220;
+        const speed = 60 + Math.random() * 140;
         const maxLife = 0.4 + Math.random() * 0.5; // seconds
-        
+
         data.particles.push({
           x: originX,
           y: originY,
-          vx: Math.cos(angle) * speed,
+          vx: Math.cos(angle) * speed + scrollVx,
           vy: Math.sin(angle) * speed,
           size: 4 + Math.random() * 8,
           color: NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)],
@@ -88,11 +73,6 @@ const animateParticleBurstsSystem: GameSystem = {
           life: 0,
           maxLife,
         });
-      }
-    } else {
-      // Keep track of score updates even if no event fired immediately
-      if (state.score !== data.lastScore) {
-        data.lastScore = state.score;
       }
     }
 

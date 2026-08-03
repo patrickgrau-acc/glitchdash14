@@ -128,26 +128,12 @@ const monitor_performance_for_fairness: GameSystem = {
     const perf = state.data.performanceMonitor as PerformanceMonitorData;
     if (!perf) return;
 
-    ctx.save();
-    
-    // Draw discreet, high-performance monitoring hud top-right
-    const x = state.width - 140;
-    const y = 16;
-    
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-    ctx.roundRect ? ctx.roundRect(x, y, 126, 42, 6) : ctx.rect(x, y, 126, 42);
-    ctx.fill();
-
-    ctx.font = '10px Roboto, monospace';
-    ctx.fillStyle = perf.fps < 50 ? '#f87171' : perf.fps < 58 ? '#fbbf24' : '#34d399';
-    ctx.fillText(`FPS: ${perf.fps} (${perf.smoothedFrameTime.toFixed(1)}ms)`, x + 10, y + 18);
-
-    ctx.fillStyle = '#94a3b8';
-    const throttleStatus = perf.lockoutTimer > 0 ? `LOCKOUT (${Math.ceil(perf.lockoutTimer)}s)` : 'STABLE';
-    ctx.fillText(`GOVERNOR: ${throttleStatus}`, x + 10, y + 32);
-
-    // If performance warning is active, render a non-obtrusive fair play indicator banner
-    if (perf.warningActive) {
+    // FPS/governor readout moved to the DOM status panel outside the canvas
+    // (GameCanvas.tsx) — this box was one of many stacked in the top-right corner.
+    // The throttle warning below is a debug/diagnostic signal, not something a
+    // student player needs to see mid-run, so it's now gated behind debug mode too.
+    if (perf.warningActive && state.data.debug?.enabled) {
+      ctx.save();
       ctx.fillStyle = 'rgba(239, 68, 68, 0.85)';
       ctx.fillRect(state.width / 2 - 140, 50, 280, 26);
       ctx.fillStyle = '#ffffff';
@@ -155,9 +141,8 @@ const monitor_performance_for_fairness: GameSystem = {
       ctx.textAlign = 'center';
       ctx.fillText('⚡ HARDWARE THROTTLE: FAIRNESS GOVERNOR ACTIVE', state.width / 2, 67);
       ctx.textAlign = 'left';
+      ctx.restore();
     }
-
-    ctx.restore();
   },
 };
 

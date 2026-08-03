@@ -81,30 +81,26 @@ const calculateDisplayFinalSessionSystem: GameSystem = {
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     if (state.phase !== 'over') return;
 
+    // GameCanvas.tsx's DOM overlay already owns: the "GAME OVER — score X" status
+    // line, the current score & best-score header above the canvas, the RETRY
+    // button, and the input hint — all centered over this exact area. This system
+    // previously redrew a whole second bordered panel with its own final score,
+    // session best, and retry hint UNDER that overlay, which is why the game-over
+    // screen showed two boxes and overlapping duplicate text. The one thing here
+    // that ISN'T shown anywhere else is the meme remark, so that's all that's left,
+    // moved to the top of the canvas so it doesn't sit under the DOM overlay's
+    // centered content.
     const data = (state.data.calculateDisplayFinalSession = state.data.calculateDisplayFinalSession || {}) as FinalSessionData;
     const finalScore = data.lastRecordedScore || Math.floor(state.score);
-    const bestScore = Math.max(state.best, data.bestScoreStored, finalScore);
 
     ctx.save();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    const cx = state.width / 2;
-    const cy = state.height / 2;
 
-    // Meme-appropriate bold irreverent commentary box
-    ctx.fillStyle = 'rgba(20, 10, 30, 0.85)';
-    ctx.strokeStyle = '#00ffcc';
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.roundRect(cx - 240, cy - 110, 480, 180, 16);
-    ctx.fill();
-    ctx.stroke();
-
-    // High energy title / meme remark
-    ctx.font = '900 26px Roboto, sans-serif';
+    ctx.font = '900 22px Roboto, sans-serif';
     ctx.fillStyle = '#ff0055';
     ctx.shadowColor = '#ff0055';
-    ctx.shadowBlur = 12;
+    ctx.shadowBlur = 10;
     const memePhrases = [
       'BRO REALLY HIT A WALL 💀',
       'ABSOLUTE SKILL ISSUE 📉',
@@ -113,21 +109,7 @@ const calculateDisplayFinalSessionSystem: GameSystem = {
     ];
     // Pick phrase deterministically or stable based on score
     const phraseIndex = Math.abs(finalScore) % memePhrases.length;
-    ctx.fillText(memePhrases[phraseIndex], cx, cy - 70);
-
-    // Final score & Session Best display
-    ctx.shadowBlur = 0;
-    ctx.font = '700 20px Roboto, sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(`FINAL SCORE: ${finalScore}`, cx, cy - 20);
-
-    ctx.font = '700 18px Roboto, sans-serif';
-    ctx.fillStyle = '#00ffcc';
-    ctx.fillText(`SESSION BEST: ${bestScore}`, cx, cy + 18);
-
-    ctx.font = '400 13px Roboto, sans-serif';
-    ctx.fillStyle = '#a0aec0';
-    ctx.fillText('PRESS START OR RESTART TO GO AGAIN', cx, cy + 55);
+    ctx.fillText(memePhrases[phraseIndex], state.width / 2, 46);
 
     ctx.restore();
   }

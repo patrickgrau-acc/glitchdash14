@@ -50,38 +50,8 @@ const displayLiveScoreDuringGameplay: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState) {
-    if (state.phase !== 'playing') return;
-
-    const data = state.data.liveScoreDisplay || { pulseTimer: 0, lastScore: state.score };
-    const scoreVal = Math.floor(state.score || 0);
-
-    ctx.save();
-    
-    // Position cleanly in the top-right corner to avoid obstructing core movement area
-    const x = state.width - 24;
-    const y = 36;
-
-    const scale = 1 + (data.pulseTimer > 0 ? 0.25 * (data.pulseTimer / 0.3) : 0);
-
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.scale(scale, scale);
-
-    // Bold, chunky, irreverent arcade typography adhering to high-contrast accessibility standards
-    ctx.font = '900 28px Roboto, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'top';
-
-    // High contrast backdrop shadow/glow for readability
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-    ctx.fillText(`SCORE: ${scoreVal}`, 2, 2);
-
-    // Primary high-contrast text color (Material You theme accent / bright foreground)
-    ctx.fillStyle = data.pulseTimer > 0 ? '#4ff0b7' : '#ffffff';
-    ctx.fillText(`SCORE: ${scoreVal}`, 0, 0);
-
-    ctx.restore();
-    ctx.restore();
+    // Score is already shown by GameCanvas.tsx's DOM header (SCORE/BEST above the canvas) —
+    // this canvas-drawn copy was duplicating it in the same top-right area every frame.
   },
 };
 

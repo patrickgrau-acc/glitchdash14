@@ -18,6 +18,6 @@ export const CORE_ID = "base_player";
 /** Phase → the system id that owns authoritative state during it. */
 export const PHASE_OWNERS: Record<string, string> = {
   "ready": "base_player",
-  "playing": "manage_session_progress",
+  "playing": "base_player",
   "over": "base_player"
 };

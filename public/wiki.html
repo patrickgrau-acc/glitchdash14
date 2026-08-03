@@ -320,6 +320,7 @@
       <ul id="tocList">
         <li><a href="#quickstart">🚀 30-Second Quick Start</a></li>
         <li><a href="#controls">🎮 Controls & Input</a></li>
+        <li><a href="#keybindings">⌨️ Full Key Bindings</a></li>
         <li><a href="#objective">🏆 Objective & Scoring</a></li>
         <li><a href="#difficulty">📈 Dynamic Difficulty</a></li>
         <li><a href="#collision">💥 Collision & Hitboxes</a></li>
@@ -373,6 +374,49 @@
               <td>Tap or Click on Canvas</td>
               <td>Triggers jump action and immediately starts/restarts run on touch interaction.</td>
             </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Full Key Bindings Section -->
+      <section id="keybindings" class="card">
+        <h2>Full Key Bindings Reference</h2>
+        <p>Every key GlitchDash14 listens for, in one place. Each key does exactly one thing — no key is double-bound to two unrelated actions.</p>
+
+        <h3>Core Gameplay</h3>
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Action</th><th>When it works</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><kbd>Space</kbd> / <kbd>ArrowUp</kbd> / <kbd>W</kbd> / Click / Tap</td><td>Jump</td><td>Playing</td></tr>
+            <tr><td><kbd>ArrowDown</kbd> / <kbd>S</kbd></td><td>Dodge down</td><td>Playing</td></tr>
+            <tr><td><kbd>X</kbd> / <kbd>Shift</kbd></td><td>Glitch Dash (short speed burst + particle trail)</td><td>Playing</td></tr>
+            <tr><td>Any key, Click, or Tap</td><td>Start the run (from Ready) / Instant retry (from Game Over)</td><td>Ready, Game Over</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Settings & Toggles</h3>
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><kbd>M</kbd></td><td>Mute / unmute audio (badge flashes briefly to confirm, then hides)</td></tr>
+            <tr><td><kbd>T</kbd></td><td>Cycle visual theme (Neon Arcade, Vaporwave Sunset, High Contrast, Classic Campus) — also has a "Cycle" button in the Status &amp; Config panel below the game</td></tr>
+            <tr><td><kbd>P</kbd></td><td>Cycle deployment profile (Quick Break, Large-Scale Projection, Standard Classroom)</td></tr>
+            <tr><td><kbd>H</kbd></td><td>Toggle high-contrast / colorblind-safe accessibility mode</td></tr>
+          </tbody>
+        </table>
+        <p>Live difficulty tuning (speed, obstacle gap, gravity) isn't a key binding — it's three sliders in the <strong>Status &amp; Config</strong> panel beneath the game canvas.</p>
+
+        <h3>Diagnostic (not needed to play)</h3>
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><kbd>` </kbd> (backquote)</td><td>Toggle the debug/calibration overlay (FPS, speed, obstacle count, phase) — off by default</td></tr>
           </tbody>
         </table>
       </section>

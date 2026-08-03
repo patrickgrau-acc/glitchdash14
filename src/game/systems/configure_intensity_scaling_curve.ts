@@ -73,19 +73,11 @@ const configureIntensityScalingCurveSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState) {
-    if (state.phase !== 'playing' || !state.data.intensity) return;
-
-    // Subtle difficulty indicator badge in top-right area of canvas
-    const intensity = state.data.intensity;
-    ctx.save();
-    ctx.font = '11px Roboto, sans-serif';
-    ctx.fillStyle = intensity.hardCapReached ? '#ef4444' : '#0ea5e9';
-    ctx.textAlign = 'right';
-    const label = intensity.hardCapReached 
-      ? 'MAX INTENSITY (HARD CAP)' 
-      : `INTENSITY x${intensity.globalSpeedMultiplier.toFixed(2)}`;
-    ctx.fillText(label, state.width - 16, 48);
-    ctx.restore();
+    // Intensity badge is owned by apply_smoothing_functions.ts, which runs later in
+    // system order (25 vs this system's 10) and overwrites this system's own
+    // state.data.globalSpeedMultiplier/hardCapReached every frame — so this file's
+    // own computed intensity.globalSpeedMultiplier never reflects what's actually
+    // applied to gameplay, and its badge would have shown a stale/wrong number.
   },
 };
 

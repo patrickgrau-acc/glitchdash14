@@ -40,16 +40,8 @@ class GenerateHighEnergyAudioFeedback implements GameSystem {
       state.data.audio = { muted: false };
     }
 
-    // Toggle mute with 'KeyM' if just pressed
-    if (input.justPressed.has('KeyM')) {
-      state.data.audio.muted = !state.data.audio.muted;
-      if (state.data.audio.muted) {
-        state.events.push('audio_muted');
-      } else {
-        state.events.push('audio_unmuted');
-      }
-    }
-
+    // Mute toggling is owned by manage_game_audio_controls.ts — this system only
+    // reads the shared muted flag to decide whether to play sound effects.
     if (state.data.audio.muted) {
       return; // All audio feedback silenced when muted
     }
@@ -61,7 +53,10 @@ class GenerateHighEnergyAudioFeedback implements GameSystem {
     for (const event of state.events) {
       if (event === 'jump') {
         this.playJumpSound(ctx);
-      } else if (event === 'score') {
+      } else if (event === 'cleared') {
+        // Only plays when an obstacle is actually jumped over — was firing on
+        // every continuous score tick (base_player scores by survival time,
+        // not per-obstacle), regardless of whether anything was jumped.
         this.playScoreSound(ctx);
       } else if (event === 'hit' || event === 'over') {
         this.playDeathSound(ctx);
@@ -164,16 +159,7 @@ class GenerateHighEnergyAudioFeedback implements GameSystem {
   }
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    // Optional discreet HUD indicator showing mute state if active
-    const audioState = state.data.audio;
-    if (audioState && audioState.muted) {
-      ctx.save();
-      ctx.font = 'bold 12px Roboto, sans-serif';
-      ctx.fillStyle = '#ef4444';
-      ctx.textAlign = 'right';
-      ctx.fillText('🔇 AUDIO MUTED (Press M)', state.width - 20, 30);
-      ctx.restore();
-    }
+    // Mute badge is owned by manage_game_audio_controls.ts (avoids a 3rd duplicate widget).
   }
 }
 

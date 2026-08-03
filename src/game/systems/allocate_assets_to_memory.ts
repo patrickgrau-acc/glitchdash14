@@ -58,17 +58,13 @@ const allocateAssetsSystem: GameSystem = {
       state.data.assetsInitializedInMemoery = true;
     }
 
-    // Check optional key trigger or debug shortcut if needed (e.g. 'KeyM')
-    if (input.justPressed.has('KeyM')) {
-      state.events.push('asset_memory_debug_checked');
-    }
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     // Minimal discreet HUD indicator or memory cache status if in debug/ready phase
     // Avoids drawing over core game surfaces owned by GameCanvas.
     const manifest = state.data.assetManifest as AssetManifest;
-    if (manifest && state.phase === 'ready') {
+    if (manifest && state.phase === 'ready' && state.data.debug?.enabled) {
       ctx.save();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
       ctx.font = '10px Roboto, sans-serif';

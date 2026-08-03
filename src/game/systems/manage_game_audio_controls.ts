@@ -11,6 +11,8 @@ interface AudioControlData {
   muted: boolean;
   previousVolume: number;
   lastToggleTime: number;
+  /** Seconds remaining to show the badge after a toggle; badge is hidden at 0 */
+  badgeShowTimer: number;
 }
 
 const AUDIO_STORAGE_KEY = 'glitchdash14_audio_muted';
@@ -35,6 +37,7 @@ const manageGameAudioControlsSystem: GameSystem = {
       muted: persistedMuted,
       previousVolume: 1.0,
       lastToggleTime: 0,
+      badgeShowTimer: 0,
       audioContextSupported: typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext) !== undefined
     } as AudioControlData;
   },
@@ -46,7 +49,8 @@ const manageGameAudioControlsSystem: GameSystem = {
 
     const audioData = state.data.audio as AudioControlData;
 
-    // Check for M key press or UI toggle event in state.events
+    // Sole owner of the mute toggle (was previously duplicated across 3 systems,
+    // each reading the same KeyM press and re-toggling the same flag).
     const mPressed = input.justPressed.has('KeyM');
     const toggleEventRequested = state.events.includes('toggle_mute');
 
@@ -56,6 +60,7 @@ const manageGameAudioControlsSystem: GameSystem = {
       if (now - audioData.lastToggleTime > 250) {
         audioData.lastToggleTime = now;
         audioData.muted = !audioData.muted;
+        audioData.badgeShowTimer = 2.0; // reveal the badge for 2s, then it fades from view
 
         // Persist mute state to localStorage to ensure it survives session restarts
         try {
@@ -67,6 +72,10 @@ const manageGameAudioControlsSystem: GameSystem = {
         // Push event to notify other audio/sound effect systems
         state.events.push(audioData.muted ? 'audio_muted' : 'audio_restored');
       }
+    }
+
+    if (audioData.badgeShowTimer > 0) {
+      audioData.badgeShowTimer = Math.max(0, audioData.badgeShowTimer - dt);
     }
 
     // Apply mute state to any active HTML audio elements or Web Audio API nodes in the document
@@ -82,9 +91,9 @@ const manageGameAudioControlsSystem: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     const audioData = state.data.audio as AudioControlData;
-    if (!audioData) return;
+    if (!audioData || !audioData.badgeShowTimer) return;
 
-    // Draw a subtle, accessible audio indicator/button in the top-right corner of the canvas
+    // Only visible for a couple seconds right after pressing 'M' — not a permanent HUD fixture.
     const padding = 16;
     const x = state.width - 52 - padding;
     const y = padding;
@@ -92,12 +101,13 @@ const manageGameAudioControlsSystem: GameSystem = {
     const h = 32;
 
     ctx.save();
-    
+    ctx.globalAlpha = Math.min(1, audioData.badgeShowTimer / 0.4);
+
     // Background pill
     ctx.fillStyle = audioData.muted ? 'rgba(239, 68, 68, 0.85)' : 'rgba(30, 41, 59, 0.85)';
     ctx.strokeStyle = audioData.muted ? 'rgba(248, 113, 113, 1)' : 'rgba(71, 85, 105, 1)';
     ctx.lineWidth = 1.5;
-    
+
     // Rounded rect helper
     ctx.beginPath();
     ctx.roundRect(x, y, w, h, 8);
@@ -109,7 +119,7 @@ const manageGameAudioControlsSystem: GameSystem = {
     ctx.font = 'bold 11px Roboto, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
+
     const iconLabel = audioData.muted ? 'MUTE' : 'AUDIO';
     ctx.fillText(iconLabel, x + w / 2, y + h / 2);
 

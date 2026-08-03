@@ -102,14 +102,8 @@ const manageSessionProgressSystem: GameSystem = {
     ctx.lineTo(state.width, horizonY);
     ctx.stroke();
 
-    // If target 90-second session duration is reached, display a subtle steady-state indicator per TS-0008
-    if (progressData.targetDurationReached) {
-      ctx.font = '10px Roboto, sans-serif';
-      ctx.fillStyle = 'rgba(255, 215, 0, 0.7)';
-      ctx.textAlign = 'right';
-      ctx.fillText('STABLE STATE LOCK [90s+]', state.width - 20, 30);
-    }
-
+    // "Stable state lock" status now lives in the DOM Status & Config panel
+    // (GameCanvas.tsx) alongside Intensity, not as floating canvas text.
     ctx.restore();
   },
 };

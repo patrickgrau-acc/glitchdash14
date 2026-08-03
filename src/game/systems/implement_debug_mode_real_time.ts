@@ -17,8 +17,8 @@ const debugModeSystem: GameSystem = {
   reset(state: GameState) {
     // Initialize debug metrics storage within permissive game state data scratchpad
     state.data.debug = {
-      // Toggle to enable/disable debug overlay (set to true for calibration testing per TS-0012)
-      enabled: true,
+      // Off by default in production; press Backquote to reveal the calibration overlay.
+      enabled: false,
       elapsedTime: 0,
       currentSpeed: 0,
       obstacleFrequency: 0,
@@ -32,8 +32,8 @@ const debugModeSystem: GameSystem = {
     const debug = state.data.debug;
     if (!debug) return;
 
-    // Toggle debug mode on pressing 'KeyM' (M key) or configured debug flag
-    if (input.justPressed.has('KeyM')) {
+    // Dedicated debug key (not 'KeyM' — that's already the audio mute toggle)
+    if (input.justPressed.has('Backquote')) {
       debug.enabled = !debug.enabled;
     }
 

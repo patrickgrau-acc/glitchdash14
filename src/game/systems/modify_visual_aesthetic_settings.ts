@@ -109,17 +109,18 @@ const ModifyVisualAestheticSettingsSystem: GameSystem = {
       this.reset!(state);
     }
 
-    // Process any incoming aesthetic update events from UI or keybindings
-    // e.g., checking if user switched theme via events or custom inputs
-    for (const event of state.events) {
-      if (event.startsWith('set_theme:')) {
-        const themeKey = event.split(':')[1];
-        if (SCHOOL_APPROVED_PALETTES[themeKey]) {
-          state.data.aesthetic.activePaletteId = themeKey;
-          state.data.aesthetic.palette = SCHOOL_APPROVED_PALETTES[themeKey];
-          state.data.aesthetic.contrastValidated = true;
-        }
-      }
+    // Direct selection from the Status & Config panel's dropdown. This reads
+    // state.data (not state.events) deliberately — engine.ts's step() clears
+    // state.events at the start of EVERY frame, so anything a React handler
+    // pushes there between animation frames is wiped before any system ever
+    // sees it. state.data has no such reset, so it's the only reliable channel
+    // for a UI control outside the frame loop to reach into game state.
+    if (state.data.requestedThemeId && SCHOOL_APPROVED_PALETTES[state.data.requestedThemeId]) {
+      const themeKey = state.data.requestedThemeId;
+      state.data.aesthetic.activePaletteId = themeKey;
+      state.data.aesthetic.palette = SCHOOL_APPROVED_PALETTES[themeKey];
+      state.data.aesthetic.contrastValidated = true;
+      state.data.requestedThemeId = undefined;
     }
 
     // Allow keyboard shortcut 'T' to cycle themes for quick live testing in arcade mode
@@ -134,21 +135,8 @@ const ModifyVisualAestheticSettingsSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    const aesthetic = state.data.aesthetic;
-    if (!aesthetic || !aesthetic.palette) return;
-
-    const palette = aesthetic.palette as ColorPalette;
-
-    // Apply live background tint if playing
-    if (state.phase === 'playing') {
-      ctx.save();
-      // Draw subtle theme accent watermark or accessibility badge in corner
-      ctx.fillStyle = palette.text;
-      ctx.font = '12px Roboto, sans-serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(`Theme: ${palette.name} [Press T to cycle]`, state.width - 16, 32);
-      ctx.restore();
-    }
+    // Theme name + cycle control now live in the DOM status panel (GameCanvas.tsx),
+    // not as floating canvas text.
   },
 };
 

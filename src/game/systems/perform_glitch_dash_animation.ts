@@ -82,7 +82,9 @@ const performGlitchDashAnimation: GameSystem = {
 
     // Check events emitted by base_player or core runner for 'jump' or dash triggers
     const jumpedThisFrame = state.events.includes('jump');
-    const requestedDash = input.justPressed.has('KeyX') || input.justPressed.has('KeyShiftLeft') || (jumpedThisForm(jumpedThisFrame, sysState));
+    // Was checking the nonexistent code 'KeyShiftLeft' — the real KeyboardEvent.code
+    // values are 'ShiftLeft'/'ShiftRight', so this alternate binding never fired.
+    const requestedDash = input.justPressed.has('KeyX') || input.justPressed.has('ShiftLeft') || input.justPressed.has('ShiftRight') || (jumpedThisForm(jumpedThisFrame, sysState));
 
     function jumpedThisForm(jumped: boolean, s: DashSystemState): boolean {
       if (jumped && s.dashCooldown <= 0) {

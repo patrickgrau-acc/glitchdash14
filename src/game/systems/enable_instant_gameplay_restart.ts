@@ -71,20 +71,7 @@ const system: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    if (state.phase === 'over') {
-      ctx.save();
-      ctx.font = 'bold 16px Roboto, sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.textAlign = 'center';
-      const cx = state.width / 2;
-      const cy = state.height / 2 + 50;
-      
-      const data = state.data as Record<string, any>;
-      const currentBest = Math.max(state.best, data.sessionHighScore || 0);
-      
-      ctx.fillText(`Session High Score: ${currentBest}`, cx, cy);
-      ctx.restore();
-    }
+    // Game-over panel (incl. best score) is owned by calculate_display_final_session.ts.
   },
 };
 

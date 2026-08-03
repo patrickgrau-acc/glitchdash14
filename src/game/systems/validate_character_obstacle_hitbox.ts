@@ -146,7 +146,6 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
 
   reset(state: GameState) {
     state.data.collisionValidation = {
-      debugHitboxesEnabled: true,
       lastCollisionTime: 0,
       tunnelingPreventedCount: 0,
       activeHitboxCollisions: 0,
@@ -228,7 +227,10 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
   render(ctx: CanvasRenderingContext2D, state: GameState) {
     if (state.phase !== 'playing') return;
     const config = state.data.collisionValidation;
-    if (!config || !config.debugHitboxesEnabled) return;
+    // Was defaulting to enabled=true with no way to turn it off — every obstacle
+    // and the player always had a debug outline box drawn around them. Now driven
+    // by the same shared debug flag (Backquote) as the rest of the diagnostics.
+    if (!config || !state.data.debug?.enabled) return;
 
     // Optional subtle debug overlay for precise hitbox visualization when enabled in state.data
     const player = state.entities.find((e) => e.kind === 'player') || state.entities[0];

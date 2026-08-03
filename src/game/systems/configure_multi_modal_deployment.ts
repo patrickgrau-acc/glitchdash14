@@ -18,7 +18,7 @@ interface DeploymentConfigProfile {
   intensityRampRate: number;
 }
 
-const PROFILES: Record<string, DeploymentConfigProfile> = {
+export const PROFILES: Record<string, DeploymentConfigProfile> = {
   quick_break: {
     name: 'Quick Individual Break',
     speedMultiplier: 1.4,
@@ -68,22 +68,33 @@ const configureMultiModalDeploymentSystem: GameSystem = {
   },
 
   update(state: GameState, input: InputState, dt: number): void {
-    // Allow toggle via shortcut key 'KeyM' for multi-modal environment demo switching
-    if (input.justPressed.has('KeyM')) {
+    // Dedicated key — was 'KeyM', which collided with the audio mute toggle.
+    let targetKey: string | undefined;
+    if (input.justPressed.has('KeyP')) {
       const keys = Object.keys(PROFILES);
       const currentKey = state.data.deploymentProfile || 'quick_break';
-      const nextIdx = (keys.indexOf(currentKey) + 1) % keys.length;
-      const newKey = keys[nextIdx];
-      const profile = PROFILES[newKey];
+      targetKey = keys[(keys.indexOf(currentKey) + 1) % keys.length];
+    }
+    // Direct selection from the Status & Config panel's dropdown, via state.data
+    // rather than state.events — engine.ts's step() clears state.events at the
+    // start of EVERY frame, so anything a React handler pushes there between
+    // animation frames is wiped before any system ever reads it.
+    if (state.data.requestedDeploymentProfile && PROFILES[state.data.requestedDeploymentProfile]) {
+      targetKey = state.data.requestedDeploymentProfile;
+      state.data.requestedDeploymentProfile = undefined;
+    }
 
-      state.data.deploymentProfile = newKey;
+    if (targetKey && PROFILES[targetKey]) {
+      const profile = PROFILES[targetKey];
+
+      state.data.deploymentProfile = targetKey;
       state.data.deploymentConfig = profile;
       state.data.globalSpeedMultiplier = profile.speedMultiplier;
       state.data.obstacleGapFactor = profile.obstacleGapFactor;
       state.data.contrastMode = profile.contrastMode;
       state.data.intensityRampRate = profile.intensityRampRate;
 
-      state.events.push(`deployment_profile_switched_${newKey}`);
+      state.events.push(`deployment_profile_switched_${targetKey}`);
     }
 
     // Apply active high-intensity ramp rate during gameplay phase
@@ -95,26 +106,17 @@ const configureMultiModalDeploymentSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
+    // Mode name now lives in the DOM status panel (GameCanvas.tsx) — only the
+    // actual visual treatment (the high-contrast border) stays on canvas.
     const contrast = state.data.contrastMode;
-    const profileName = state.data.deploymentConfig?.name || 'Quick Break';
-
-    // If large-scale projection contrast mode is active, overlay high-visibility indicator badge
-    ctx.save();
-    ctx.font = 'bold 12px Roboto, sans-serif';
-    ctx.fillStyle = contrast ? '#00FFCC' : 'rgba(255, 255, 255, 0.7)';
-    ctx.textAlign = 'right';
-    
-    // Draw subtle deployment mode indicator in top right corner (non-intrusive)
-    const text = `Mode: ${profileName} [Press M]`;
-    ctx.fillText(text, state.width - 16, 28);
-
     if (contrast) {
+      ctx.save();
       // High-visibility border highlight for large-scale projection visibility (TS-0084)
       ctx.strokeStyle = '#00FFCC';
       ctx.lineWidth = 3;
       ctx.strokeRect(4, 4, state.width - 8, state.height - 8);
+      ctx.restore();
     }
-    ctx.restore();
   }
 };
 

@@ -95,7 +95,7 @@ const objectPoolingSystem: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     // Debug render or visual indicator if debug mode is active
-    if (state.data.debugHitboxes && state.data.obstaclePool) {
+    if (state.data.debug?.enabled && state.data.obstaclePool) {
       ctx.save();
       ctx.strokeStyle = '#00ffcc';
       ctx.lineWidth = 1;

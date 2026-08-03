@@ -60,7 +60,7 @@ const system: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState) {
     // Optional telemetry or debug display if enabled in debug mode
-    if (state.data.debugHitboxes && state.data.optimizedInput) {
+    if (state.data.debug?.enabled && state.data.optimizedInput) {
       const optData = state.data.optimizedInput as OptimizedInputState;
       const latency = optData.lastVelocityChangeTime > 0 ? (optData.lastVelocityChangeTime - optData.lastInputTime).toFixed(2) : '0';
       

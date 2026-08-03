@@ -34,27 +34,10 @@ const startInitialGameplaySessionSystem: GameSystem = {
     }
   },
   render(ctx: CanvasRenderingContext2D, state: GameState) {
-    // Render start prompt overlay when in ready phase
-    if (state.phase === 'ready') {
-      ctx.save();
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-      ctx.fillRect(0, 0, state.width, state.height);
-
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      
-      // Title
-      ctx.font = 'bold 36px sans-serif';
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText('GLITCH DASH 14', state.width / 2, state.height / 2 - 40);
-
-      // Prompt satisfying TS-0000 and TS-0019
-      ctx.font = '20px sans-serif';
-      ctx.fillStyle = '#00f2fe';
-      ctx.fillText('Press Space or Click to Start', state.width / 2, state.height / 2 + 20);
-
-      ctx.restore();
-    }
+    // Ready-screen backdrop + title + start prompt are owned by GameCanvas.tsx's
+    // DOM overlay (the "Ready?" panel with the START button) — this canvas-drawn
+    // copy was stacking a second dark backdrop and a second "GLITCH DASH 14"
+    // title underneath it every time the game was idle.
   },
 };
 

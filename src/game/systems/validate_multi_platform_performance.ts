@@ -102,7 +102,7 @@ const validateMultiPlatformPerformanceSystem: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     const metrics = state.data.validateMultiPlatformPerformance;
-    if (!metrics) return;
+    if (!metrics || !state.data.debug?.enabled) return;
 
     // Render a lightweight, non-intrusive compliance & platform HUD badge (TS-0074 & TS-0076)
     // Positioned cleanly in the top-left corner to avoid overlapping core UI surfaces.

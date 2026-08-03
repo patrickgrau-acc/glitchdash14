@@ -73,7 +73,7 @@ const syncGameUpdatesDisplayRefreshSystem: GameSystem = {
   render(ctx: CanvasRenderingContext2D, state: GameState) {
     // Surface synchronization metrics subtly in debug or performance HUD if enabled
     const syncData: SyncSystemData | undefined = state.data.syncData;
-    if (!syncData || !state.data.debugHitboxes) {
+    if (!syncData || !state.data.debug?.enabled) {
       return;
     }
 

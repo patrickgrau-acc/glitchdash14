@@ -67,7 +67,7 @@ const configurePreciseCollisionHitboxSystem: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     // Tuning and configuration system; optional subtle debugging visualization if enabled in state.data
-    if (state.data.debugHitboxes && state.entities) {
+    if (state.data.debug?.enabled && state.entities) {
       ctx.save();
       ctx.strokeStyle = 'rgba(0, 255, 204, 0.6)';
       ctx.lineWidth = 1;

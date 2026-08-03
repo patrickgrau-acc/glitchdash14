@@ -129,7 +129,9 @@ const optimizeCollisionDetectionSystem: GameSystem = {
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
     const perf = state.data.collisionPerformance;
-    if (!perf || state.phase !== 'playing') return;
+    // Dev-only perf telemetry — same debug gate as the FPS/governor readout and
+    // platform badge, so it doesn't show to players by default.
+    if (!perf || state.phase !== 'playing' || !state.data.debug?.enabled) return;
 
     // Subtle, low-profile performance telemetry indicator in top-right corner
     ctx.save();
