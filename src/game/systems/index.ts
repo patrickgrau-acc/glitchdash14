@@ -9,20 +9,21 @@ import s1 from './apply_smoothing_functions';
 import s2 from './base_player';
 import s3 from './calculate_display_final_session';
 import s4 from './configure_audio_mute_toggle';
-import s5 from './configure_global_difficulty';
-import s6 from './configure_intensity_scaling_curve';
-import s7 from './configure_precise_collision_hitbox';
-import s8 from './construct_self_contained_deployment';
-import s9 from './display_live_score_during_gameplay';
-import s10 from './implement_screen_shake_feedback';
-import s11 from './manage_session_progress';
-import s12 from './monitor_performance_for_fairness';
-import s13 from './monitor_player_performance';
-import s14 from './optimize_collision_detection';
-import s15 from './start_initial_gameplay_session';
-import s16 from './validate_character_obstacle_hitbox';
+import s5 from './configure_game_balance_constants';
+import s6 from './configure_global_difficulty';
+import s7 from './configure_intensity_scaling_curve';
+import s8 from './configure_precise_collision_hitbox';
+import s9 from './construct_self_contained_deployment';
+import s10 from './display_live_score_during_gameplay';
+import s11 from './implement_screen_shake_feedback';
+import s12 from './manage_session_progress';
+import s13 from './monitor_performance_for_fairness';
+import s14 from './monitor_player_performance';
+import s15 from './optimize_collision_detection';
+import s16 from './start_initial_gameplay_session';
+import s17 from './validate_character_obstacle_hitbox';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
