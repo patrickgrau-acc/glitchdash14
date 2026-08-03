@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Icon } from '@/components/ui';
+import { Icon, type IconName } from '@/components/ui';
 
 export type ToastVariant = 'success' | 'error' | 'warning' | 'info';
 
@@ -63,13 +63,19 @@ export function useToast() {
 }
 
 function ToastViewport({ toasts, onDismiss }: { toasts: ToastItem[]; onDismiss: (id: string) => void }) {
-  if (typeof window === 'undefined') return null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return createPortal(
     <div className="fixed bottom-4 right-4 z-50 flex flex-col space-y-2 max-w-sm w-full pointer-events-none">
       {toasts.map((t) => {
         let borderColor = 'border-border';
-        let iconName = 'Info';
+        let iconName: IconName = 'Info';
         let iconColor = 'text-accent';
 
         if (t.variant === 'success') {
