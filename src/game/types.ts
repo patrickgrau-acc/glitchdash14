@@ -1,5 +1,7 @@
-// ── src/game/types.ts ──
-// Extended living data model for GlitchDash14 intensity scaling mechanics
+/**
+ * Extended living data model for GlitchDash14 intensity scaling mechanics
+ * Includes difficulty configuration tracking for centralized constant enforcement.
+ */
 
 export type Phase = 'ready' | 'playing' | 'over';
 
@@ -16,6 +18,19 @@ export interface Entity {
   x: number; y: number; w: number; h: number;
   vx: number; vy: number;
   [key: string]: any;
+}
+
+export interface DifficultyConfigSchema {
+  /** Initial speed of obstacles and course */
+  INITIAL_SPEED: number;
+  /** Minimum obstacle gap boundary to prevent impossible states */
+  MIN_OBSTACLE_GAP: number;
+  /** Increment rate per second of gameplay */
+  SPEED_INCREMENT_RATE: number;
+  /** Maximum safe speed cap */
+  MAX_SPEED_CAP: number;
+  /** Global gravity multiplier */
+  GRAVITY_MULTIPLIER: number;
 }
 
 export interface GameState {
