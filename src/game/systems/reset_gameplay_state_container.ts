@@ -70,14 +70,7 @@ const resetGameplayStateContainerSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    // Render transient restart transition flash or helper overlays if active
-    if (state.data.resetFlashTimer && state.data.resetFlashTimer > 0) {
-      state.data.resetFlashTimer -= 0.016;
-      ctx.save();
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, state.data.resetFlashTimer * 3)})`;
-      ctx.fillRect(0, 0, state.width, state.height);
-      ctx.restore();
-    }
+    /* removed by render-ownership gate: duplicate full_backdrop for phase 'over', already owned by src/game/systems/enable_instant_gameplay_restart.ts */
   }
 };
 
