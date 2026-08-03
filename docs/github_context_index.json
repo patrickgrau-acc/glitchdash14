@@ -14,6 +14,41 @@
           "parent_page_file": "src/index.tsx"
         },
         {
+          "name": "Toaststore",
+          "file": "src/components/notifications/toastStore.ts",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "derived": true,
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Usetoast",
+          "file": "src/components/notifications/useToast.ts",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/notifications/toastStore",
+            "src/components/notifications"
+          ],
+          "prop_interfaces": [],
+          "derived": true,
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "ToastViewport",
+          "file": "src/components/notifications/Toast.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/notifications/toastStore",
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
           "name": "Icon",
           "file": "src/components/ui/index.tsx",
           "type": "component",
@@ -203,6 +238,275 @@
           "parent_page_file": "src/index.tsx"
         },
         {
+          "name": "Cn",
+          "file": "src/components/ui/cn.ts",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "derived": true,
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Icon",
+          "file": "src/components/ui/Icon.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [
+            {
+              "name": "IconProps",
+              "props": "name: string; className?: string; size?: number"
+            }
+          ],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Cmp",
+          "file": "src/components/ui/Icon.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [
+            {
+              "name": "IconProps",
+              "props": "name: string; className?: string; size?: number"
+            }
+          ],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Button",
+          "file": "src/components/ui/Button.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Card",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardHeader",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardTitle",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardDescription",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardContent",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardFooter",
+          "file": "src/components/ui/Card.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Label",
+          "file": "src/components/ui/Input.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Badge",
+          "file": "src/components/ui/Badge.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "PageHeader",
+          "file": "src/components/ui/PageHeader.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [
+            {
+              "name": "PageHeaderProps",
+              "props": "title: string; description?: string; children?: React.ReactNode"
+            }
+          ],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Spinner",
+          "file": "src/components/ui/States.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn",
+            "src/components/ui/Icon"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Skeleton",
+          "file": "src/components/ui/States.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn",
+            "src/components/ui/Icon"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "EmptyState",
+          "file": "src/components/ui/States.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn",
+            "src/components/ui/Icon"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Table",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "THead",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TBody",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TR",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TH",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TD",
+          "file": "src/components/ui/Table.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/cn"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Modal",
+          "file": "src/components/ui/Modal.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui/Icon"
+          ],
+          "prop_interfaces": [
+            {
+              "name": "ModalProps",
+              "props": "open: boolean; onClose: () => void; title?: string; children: React.ReactNode"
+            }
+          ],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
           "name": "WorkflowProvider",
           "file": "src/components/workflow/index.tsx",
           "type": "component",
@@ -271,6 +575,38 @@
           "parent_page_file": "src/index.tsx"
         },
         {
+          "name": "Sidebar",
+          "file": "src/components/layout/Sidebar.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/config/navigation",
+            "src/config/navigation",
+            "src/config/journeys",
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "MainLayout",
+          "file": "src/components/layout/MainLayout.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/layout/Sidebar",
+            "src/components/ui",
+            "src/components/notifications"
+          ],
+          "prop_interfaces": [
+            {
+              "name": "MainLayoutProps",
+              "props": "children: React.ReactNode"
+            }
+          ],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
           "name": "Page",
           "file": "app/page.tsx",
           "type": "page",
@@ -311,21 +647,6 @@
             "src/components/ui"
           ],
           "prop_interfaces": []
-        }
-      ]
-    }
-  },
-  "layer7": {
-    "frontend": {
-      "screens": [
-        {
-          "name": "Next.config",
-          "file": "next.config.js",
-          "type": "component",
-          "api_calls": [],
-          "component_imports": [],
-          "prop_interfaces": [],
-          "derived": true
         },
         {
           "name": "GameStateIncludingPage",
