@@ -10,7 +10,7 @@
  * preventing high-velocity tunneling through thin obstacles.
  */
 
-import { GameSystem, GameState, InputState, Entity } from '@/types';
+import { GameSystem, GameState, InputState, Entity } from '@/game/types';
 
 // Extend Entity or GameState via shared scratchpad state.data.<key>
 // and document any custom properties needed.
