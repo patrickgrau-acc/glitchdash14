@@ -1,1 +1,56 @@
-AIResponse(text="// Implements: SPEC-ZXMWC (Present Session Summary upon Gameplay Termination)\n// Satisfies: TS-0088, TS-0099\nimport { GameSystem, GameState, InputState } from '../types';\n\n/**\n * Present Session Summary upon Gameplay Termination (zxMwc7A0miUQq8afKbka)\n * Manages game over state summary data, retrieves and compares high scores from localStorage,\n * and tracks retry interaction readiness for the session termination phase.\n */\nclass PresentSessionSummarySystem implements GameSystem {\n  id = 'present_session_upon_gameplay';\n  order = 50;\n\n  reset(state: GameState): void {\n    state.data.summaryViewed = false;\n    state.data.highScoreRetrieved = false;\n    state.data.sessionFinalScore = 0;\n  }\n\n  update(state: GameState, input: InputState, dt: number): void {\n    if (state.phase === 'over') {\n      if (!state.data.summaryViewed) {\n        state.data.summaryViewed = true;\n        state.data.sessionFinalScore = state.score;\n\n        try {\n          const stored = localStorage.getItem('glitchdash_high_score');\n          const currentBest = stored ? parseInt(stored, 10) || 0 : 0;\n          if (state.score > currentBest) {\n            localStorage.setItem('glitchdash_high_score', String(state.score));\n            state.best = state.score;\n          } else {\n            state.best = Math.max(state.score, currentBest);\n          }\n          state.data.highScoreRetrieved = true;\n          state.data.localHighScore = state.best;\n        } catch (e) {\n          // Fallback if localStorage is restricted\n          state.best = Math.max(state.score, state.best);\n          state.data.localHighScore = state.best;\n        }\n      }\n    } else {\n      if (state.data.summaryViewed) {\n        state.data.summaryViewed = false;\n      }\n    }\n  }\n\n  render(ctx: CanvasRenderingContext2D, state: GameState): void {\n    // Render nothing for 'over' phase to avoid duplicating the backdrop owned by enable_instant_gameplay_restart\n  }\n}\n\nexport default new PresentSessionSummarySystem();", success=True, error=None)
+// Implements: SPEC-ZXMWC (Present Session Summary upon Gameplay Termination)
+// Satisfies: TS-0088, TS-0099
+import { GameSystem, GameState, InputState } from '../types';
+
+/**
+ * Present Session Summary upon Gameplay Termination (zxMwc7A0miUQq8afKbka)
+ * Manages game over state summary data, retrieves and compares high scores from localStorage,
+ * and tracks retry interaction readiness for the session termination phase.
+ */
+class PresentSessionSummarySystem implements GameSystem {
+  id = 'present_session_upon_gameplay';
+  order = 50;
+
+  reset(state: GameState): void {
+    state.data.summaryViewed = false;
+    state.data.highScoreRetrieved = false;
+    state.data.sessionFinalScore = 0;
+  }
+
+  update(state: GameState, input: InputState, dt: number): void {
+    if (state.phase === 'over') {
+      if (!state.data.summaryViewed) {
+        state.data.summaryViewed = true;
+        state.data.sessionFinalScore = state.score;
+
+        try {
+          const stored = localStorage.getItem('glitchdash_high_score');
+          const currentBest = stored ? parseInt(stored, 10) || 0 : 0;
+          if (state.score > currentBest) {
+            localStorage.setItem('glitchdash_high_score', String(state.score));
+            state.best = state.score;
+          } else {
+            state.best = Math.max(state.score, currentBest);
+          }
+          state.data.highScoreRetrieved = true;
+          state.data.localHighScore = state.best;
+        } catch (e) {
+          // Fallback if localStorage is restricted
+          state.best = Math.max(state.score, state.best);
+          state.data.localHighScore = state.best;
+        }
+      }
+    } else {
+      if (state.data.summaryViewed) {
+        state.data.summaryViewed = false;
+      }
+    }
+  }
+
+  render(ctx: CanvasRenderingContext2D, state: GameState): void {
+    // Render nothing for 'over' phase to avoid duplicating the backdrop owned by enable_instant_gameplay_restart
+  }
+}
+
+const presentSessionSummarySystem = new PresentSessionSummarySystem();
+export default presentSessionSummarySystem;
