@@ -1,50 +1,64 @@
 {
   "frontend_routes": [
     {
-      "path": "/",
-      "component": "app/page.tsx",
-      "purpose": "Home / Arcade Entry",
-      "auth_required": false
-    },
-    {
-      "path": "/glitch_dash",
-      "component": "app/glitch_dash/page.tsx",
-      "purpose": "Endless Runner Arcade Game",
+      "path": "/configure_game_parameters",
+      "component": "app/configure_game_parameters/page.tsx",
+      "purpose": "Configure Game Parameters",
       "auth_required": false
     },
     {
       "path": "/dashboard",
       "component": "app/dashboard/page.tsx",
-      "purpose": "Scores, Leaderboard & Analytics Dashboard",
+      "purpose": "Dashboard",
+      "auth_required": false
+    },
+    {
+      "path": "/deliver_self_contained",
+      "component": "app/deliver_self_contained/page.tsx",
+      "purpose": "Deliver Self Contained",
+      "auth_required": false
+    },
+    {
+      "path": "/design_high_energy",
+      "component": "app/design_high_energy/page.tsx",
+      "purpose": "Design High Energy",
+      "auth_required": false
+    },
+    {
+      "path": "/develop_single_page",
+      "component": "app/develop_single_page/page.tsx",
+      "purpose": "Develop Single Page",
+      "auth_required": false
+    },
+    {
+      "path": "/frictionless_instant_retry",
+      "component": "app/frictionless_instant_retry/page.tsx",
+      "purpose": "Frictionless Instant Retry",
+      "auth_required": false
+    },
+    {
+      "path": "/game_state_including",
+      "component": "app/game_state_including/page.tsx",
+      "purpose": "Game State Including",
+      "auth_required": false
+    },
+    {
+      "path": "/glitch_dash",
+      "component": "app/glitch_dash/page.tsx",
+      "purpose": "Glitch Dash",
+      "auth_required": false
+    },
+    {
+      "path": "/",
+      "component": "app/page.tsx",
+      "purpose": "Home",
+      "auth_required": false
+    },
+    {
+      "path": "/simple_responsive_one",
+      "component": "app/simple_responsive_one/page.tsx",
+      "purpose": "Simple Responsive One",
       "auth_required": false
     }
-  ],
-  "backend_routes": [],
-  "navigation_links": [
-    {
-      "from": "Sidebar",
-      "to": "/",
-      "link_type": "nav_link"
-    },
-    {
-      "from": "Sidebar",
-      "to": "/glitch_dash",
-      "link_type": "nav_link"
-    },
-    {
-      "from": "Sidebar",
-      "to": "/dashboard",
-      "link_type": "nav_link"
-    },
-    {
-      "from": "Home",
-      "to": "/glitch_dash",
-      "link_type": "button"
-    }
-  ],
-  "routing_issues": [],
-  "recommendations": [
-    "Ensure all navigation paths in src/config/navigation.ts match defined Next.js app router paths exactly.",
-    "Add dedicated backend API endpoints if persistent high scores or server-side leaderboards are needed."
   ]
 }
