@@ -3,7 +3,7 @@
 These are NON-BLOCKING suggestions. The build is not failed. Fix them to
 keep the app on the design system and looking modern.
 
-- Files scanned: 11
+- Files scanned: 18
 - AI-slop patterns (gradient hero / three-card row / 0.1 shadows / centered hero): 0
 - Raw Tailwind colors: 0 (use semantic tokens: bg-primary / text-text / border-border)
 - Inline hex colors: 0 (use tokens, not hex literals)
