@@ -19,5 +19,22 @@
       "path": "src/game/GameCanvas.tsx",
       "description": "React Canvas integration component for GlitchDash14."
     }
-  ]
+  ],
+  "layer7": {
+    "frontend": {
+      "screens": [
+        {
+          "name": "GlitchDashPage",
+          "file": "app/glitch_dash/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/game/GameCanvas",
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        }
+      ]
+    }
+  }
 }
