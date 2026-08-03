@@ -5,4 +5,4 @@ Non-blocking quality gate: when a game_mechanic_* task's own file introduces a p
 Checked: 1 | Fixed by LLM: 1 | Fixed by strip: 0 | Unresolved: 0
 
 ## Actions
-- src/game/systems/monitor_player_performance.ts: LLM rewrite removed duplicate centered_text for phase 'playing' (already owned by src/game/systems/monitor_performance_for_fairness.ts)
+- src/game/systems/present_session_upon_gameplay.ts: LLM rewrite removed duplicate full_backdrop for phase 'over' (already owned by src/game/systems/enable_instant_gameplay_restart.ts)
