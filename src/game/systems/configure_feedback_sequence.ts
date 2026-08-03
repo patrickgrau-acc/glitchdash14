@@ -60,20 +60,7 @@ const configureFeedbackSequenceSystem: GameSystem = {
   },
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    const feedback = state.data.deathFeedback as DeathFeedbackState;
-    if (!feedback || !feedback.isAnimatingDeath) return;
-
-    // Render a high-energy glitch/death feedback pulse overlay conforming to duration limits
-    const progress = Math.min(1, feedback.deathTimer / feedback.duration);
-    ctx.save();
-    ctx.fillStyle = `rgba(255, 0, 85, ${0.3 * (1 - progress)})`;
-    ctx.fillRect(0, 0, state.width, state.height);
-
-    ctx.font = 'bold 24px Roboto, sans-serif';
-    ctx.fillStyle = '#ff0055';
-    ctx.textAlign = 'center';
-    ctx.fillText('GLITCH FATALITY // REBOOTING...', state.width / 2, state.height / 2 - 40);
-    ctx.restore();
+    /* removed by render-ownership gate: duplicate full_backdrop for phase 'ready', already owned by src/game/systems/start_initial_gameplay_session.ts */
   }
 };
 
