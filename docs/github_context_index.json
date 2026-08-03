@@ -14,5 +14,22 @@
         }
       ]
     }
+  },
+  "layer6": {
+    "frontend": {
+      "screens": [
+        {
+          "name": "ValidateCharacterObstacleHitbox",
+          "file": "src/game/systems/validate_character_obstacle_hitbox.ts",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/types"
+          ],
+          "prop_interfaces": [],
+          "derived": true
+        }
+      ]
+    }
   }
 }
