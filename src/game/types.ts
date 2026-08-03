@@ -65,12 +65,16 @@ export interface GameState {
   width: number;
   /** Canvas viewport height */
   height: number;
+  /** Player entity reference */
+  player?: Entity | null;
   /** List of active entities in the game scene */
   entities: Entity[];
   /** Accumulated transient event log or trigger signals */
   events: string[];
   /** Permissive scratchpad for active game systems and tuning parameters. Includes restartTriggered flag for session restart handling. */
   data: Record<string, any>;
+  /** Current system controller owning state */
+  controller?: string;
 }
 
 export interface GameSystem {
