@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-03T02:57:12.327158+00:00",
+  "barrels": {
+    "@/components/workflow": {
+      "barrel_file": "src/components/workflow/index.tsx",
+      "exports": [
+        "WorkflowGate",
+        "WorkflowNav",
+        "WorkflowProvider",
+        "WorkflowStepper",
+        "useWorkflowContext",
+        "useWorkflowProgress"
+      ]
+    },
+    "@/components/ui": {
+      "barrel_file": "src/components/ui/index.tsx",
+      "exports": [
+        "Badge",
+        "Button",
+        "Card",
+        "CardContent",
+        "CardDescription",
+        "CardFooter",
+        "CardHeader",
+        "CardTitle",
+        "EmptyState",
+        "Icon",
+        "Input",
+        "Label",
+        "Modal",
+        "PageHeader",
+        "Select",
+        "Skeleton",
+        "Spinner",
+        "TBody",
+        "TD",
+        "TH",
+        "THead",
+        "TR",
+        "Table",
+        "Textarea"
+      ],
+      "prop_interfaces": {
+        "Icon": [
+          "name: string",
+          "className?: string",
+          "size?: number"
+        ],
+        "Modal": [
+          "open: boolean",
+          "onClose: () => void",
+          "title?: string",
+          "children: React.ReactNode"
+        ],
+        "PageHeader": [
+          "title: string",
+          "description?: string",
+          "children?: React.ReactNode"
+        ]
+      }
+    },
+    "@/components/layout": {
+      "barrel_file": "src/components/layout/index.tsx",
+      "exports": [
+        "MainLayout",
+        "Sidebar"
+      ],
+      "prop_interfaces": {
+        "MainLayout": [
+          "children: React.ReactNode"
+        ]
+      }
+    }
+  },
+  "shared_hooks": {}
+}
