@@ -36,6 +36,7 @@ const applySmoothingFunctionsSystem: GameSystem = {
     state.data.smoothingConfig = initialConfig;
     state.data.globalSpeedMultiplier = 1.0;
     state.data.obstacleGapFactor = 1.0;
+    state.data.intensity = 1.0;
     state.data.hardCapReached = false;
   },
 
@@ -75,9 +76,16 @@ const applySmoothingFunctionsSystem: GameSystem = {
       config.smoothedObstacleGapFactor = HARD_CAP.gap;
     }
 
-    // Expose smoothed metrics via state.data for game loop integration and rendering
+    // Expose smoothed metrics via state.data for game loop integration and rendering.
+    // state.data.intensity is what GameCanvas.tsx's (locked) Status & Config panel reads
+    // for its "Intensity / Hard Cap" row — it's also a plain-number field several other
+    // systems touch, so without an explicit writer here it silently falls back to
+    // whatever monitor_performance_for_fairness.ts's unrelated perf-throttle governor last
+    // left behind. Mirroring the smoothed speed multiplier keeps that display showing the
+    // actual score-based curve it's labeled for.
     state.data.globalSpeedMultiplier = config.smoothedSpeedMultiplier;
     state.data.obstacleGapFactor = config.smoothedObstacleGapFactor;
+    state.data.intensity = config.smoothedSpeedMultiplier;
     state.data.hardCapReached = intensity?.hardCapReached ?? false;
   },
 

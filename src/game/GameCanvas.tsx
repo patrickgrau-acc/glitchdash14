@@ -65,6 +65,22 @@ export default function GameCanvas() {
     setScore(0);
   };
 
+  // One-time sync on mount: liveConfig otherwise always starts at 1.00x regardless of what
+  // was actually persisted (configure_game_parameters_live.ts's reset() already restores the
+  // real values into state.data, synchronously, above — this just brings the sliders'
+  // displayed position into agreement with it on page load/reload). Runs once, not on every
+  // restart, since liveConfig already stays correct across an in-session restart on its own
+  // (it's plain React state, untouched by engine.ts's state.data wipe).
+  useEffect(() => {
+    const d = stateRef.current?.data;
+    if (!d) return;
+    setLiveConfig({
+      speedModifier: typeof d.speedModifier === 'number' ? d.speedModifier : 1,
+      gapSize: typeof d.gapSize === 'number' ? d.gapSize : 1,
+      gravityMultiplier: typeof d.gravityMultiplier === 'number' ? d.gravityMultiplier : 1,
+    });
+  }, []);
+
   useEffect(() => {
     // RAW input only — the core loop / mechanics INTERPRET it per genre.
     const down = (e: KeyboardEvent) => {

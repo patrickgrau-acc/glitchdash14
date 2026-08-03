@@ -45,14 +45,30 @@ export const PROFILES: Record<string, DeploymentConfigProfile> = {
   }
 };
 
+const DEPLOYMENT_PROFILE_STORAGE_KEY = 'glitchdash14_deployment_profile';
+
+function loadDeploymentProfile(): string {
+  try {
+    const stored = localStorage.getItem(DEPLOYMENT_PROFILE_STORAGE_KEY);
+    return stored && PROFILES[stored] ? stored : 'quick_break';
+  } catch {
+    return 'quick_break';
+  }
+}
+
+function saveDeploymentProfile(key: string): void {
+  try { localStorage.setItem(DEPLOYMENT_PROFILE_STORAGE_KEY, key); } catch { /* ignore */ }
+}
+
 const configureMultiModalDeploymentSystem: GameSystem = {
   id: 'configure_multi_modal_deployment',
   order: 5,
 
   reset(state: GameState): void {
-    // Initialise deployment profile configuration in state.data
-    // Default to quick_break if not previously configured, or check URL/storage preference
-    const activeProfileKey = state.data.deploymentProfile || 'quick_break';
+    // Restore the player's last mode instead of hardcoding 'quick_break' — engine.ts's
+    // startRun() wipes state.data on every restart, so state.data.deploymentProfile is
+    // never actually retained across a restart without this.
+    const activeProfileKey = state.data.deploymentProfile || loadDeploymentProfile();
     const profile = PROFILES[activeProfileKey] || PROFILES.quick_break;
 
     state.data.deploymentConfig = profile;
@@ -93,6 +109,7 @@ const configureMultiModalDeploymentSystem: GameSystem = {
       state.data.obstacleGapFactor = profile.obstacleGapFactor;
       state.data.contrastMode = profile.contrastMode;
       state.data.intensityRampRate = profile.intensityRampRate;
+      saveDeploymentProfile(targetKey);
 
       state.events.push(`deployment_profile_switched_${targetKey}`);
     }

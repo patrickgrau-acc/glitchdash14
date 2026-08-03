@@ -45,6 +45,16 @@ const optimizeCollisionDetectionSystem: GameSystem = {
   },
 
   update(state: GameState, _input: InputState, _dt: number): void {
+    // Unlike base_player.ts and validate_character_obstacle_hitbox.ts, this system had no
+    // phase guard at all. After death, base_player.ts stops updating (phase !== 'playing'),
+    // so the player and the obstacle it hit stay frozen in place, still overlapping — and
+    // this system kept re-detecting that same static overlap and pushing 'hit' every single
+    // frame of the game-over screen, which the audio system picked up and replayed forever
+    // instead of once. This system's own acceptance criteria (TS-0047/0051/0067) is about
+    // collision checks "when the engine calculates physics" during active play, not the
+    // frozen post-death screen.
+    if (state.phase !== 'playing') return;
+
     const startTime = performance.now();
 
     if (!state.data.optimize_collision) {
@@ -77,8 +87,12 @@ const optimizeCollisionDetectionSystem: GameSystem = {
     });
 
     // 2. High-performance collision spatial sorting & early-out optimization (TS-0051, TS-0067)
-    // Find player / runner entity
-    const player = state.entities.find(e => e.kind === 'runner' || e.kind === 'player');
+    // The real player lives in state.player (base_player.ts's own top-level field), never
+    // in state.entities — the old `state.entities.find(...)` lookup here always came up
+    // empty, so this whole block (and the perf metrics below it: totalChecks, earlyOutCount,
+    // lastCheckDurationMs) never actually ran. TS-0067's "under 0.5ms per frame" budget was
+    // never really being measured — it was reporting static zeros every frame.
+    const player = state.player;
     const obstacles = state.entities.filter(e => e.kind === 'obstacle' || e.kind === 'hazard' || e.kind === 'enemy');
 
     if (player && obstacles.length > 0) {

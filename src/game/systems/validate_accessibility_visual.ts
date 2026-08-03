@@ -16,6 +16,21 @@ interface VisualAccessibilityData {
   highContrastMode: boolean;
 }
 
+const HIGH_CONTRAST_STORAGE_KEY = 'glitchdash14_high_contrast';
+
+function loadHighContrast(): boolean {
+  try {
+    const stored = localStorage.getItem(HIGH_CONTRAST_STORAGE_KEY);
+    return stored !== null ? stored === 'true' : true;
+  } catch {
+    return true;
+  }
+}
+
+function saveHighContrast(val: boolean): void {
+  try { localStorage.setItem(HIGH_CONTRAST_STORAGE_KEY, String(val)); } catch { /* ignore */ }
+}
+
 function withAlpha(hex: string, alpha: number): string {
   const h = hex.replace('#', '');
   const r = parseInt(h.length === 3 ? h[0] + h[0] : h.slice(0, 2), 16);
@@ -24,17 +39,35 @@ function withAlpha(hex: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+// Horizontal fade mask for anything that scrolls laterally across the canvas (the near-grid
+// columns/rows): full strength across the middle, fading to fully transparent right at the
+// left/right edges. Without this, a column crossing the canvas boundary goes from fully
+// opaque to entirely absent in a single frame — a hard "pop" rather than a scroll. Building
+// the gradient in absolute canvas coordinates means it fades each element based on wherever
+// it currently sits on screen, regardless of the element's own path/shape.
+function edgeFadeGradient(ctx: CanvasRenderingContext2D, width: number, hex: string, peakAlpha: number): CanvasGradient {
+  const g = ctx.createLinearGradient(0, 0, width, 0);
+  g.addColorStop(0, withAlpha(hex, 0));
+  g.addColorStop(0.1, withAlpha(hex, peakAlpha));
+  g.addColorStop(0.9, withAlpha(hex, peakAlpha));
+  g.addColorStop(1, withAlpha(hex, 0));
+  return g;
+}
+
 const validateAccessibilityVisualSystem: GameSystem = {
   id: 'validate_accessibility_visual',
   order: 60,
 
   reset(state: GameState) {
+    // Restore the player's last choice instead of hardcoding true — engine.ts's
+    // startRun() wipes state.data on every restart, so without this the toggle
+    // silently reverted to "on" every new game regardless of what was selected.
     state.data.visualAccessibility = {
       farOffset: 0,
       midOffset: 0,
       nearOffset: 0,
       pulsePhase: 0,
-      highContrastMode: true,
+      highContrastMode: loadHighContrast(),
     } as VisualAccessibilityData;
   },
 
@@ -44,7 +77,7 @@ const validateAccessibilityVisualSystem: GameSystem = {
       midOffset: 0,
       nearOffset: 0,
       pulsePhase: 0,
-      highContrastMode: true,
+      highContrastMode: loadHighContrast(),
     }) as VisualAccessibilityData;
 
     // Parallax background only advances while the run is actually in motion, driven by
@@ -63,6 +96,7 @@ const validateAccessibilityVisualSystem: GameSystem = {
     // Toggle high-contrast / symbol accessibility mode if 'KeyH' is pressed
     if (input.justPressed.has('KeyH')) {
       data.highContrastMode = !data.highContrastMode;
+      saveHighContrast(data.highContrastMode);
       state.events.push(data.highContrastMode ? 'accessibility_contrast_on' : 'accessibility_contrast_off');
     }
   },
@@ -141,7 +175,10 @@ const validateAccessibilityVisualSystem: GameSystem = {
     const colSpan = state.width * 1.6;
     const colSpacing = colSpan / numCols;
     const colShift = data.nearOffset % colSpacing;
-    ctx.strokeStyle = withAlpha(nearColor, 0.18 * boost);
+    // Edge-faded instead of flat alpha — a column's bottom point scrolling across the
+    // canvas boundary now fades out well before it disappears and fades in after it
+    // appears, instead of cutting in/out abruptly at the edge (the reported "pop").
+    ctx.strokeStyle = edgeFadeGradient(ctx, state.width, nearColor, 0.18 * boost);
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     for (let i = -1; i <= numCols + 1; i++) {
@@ -157,7 +194,7 @@ const validateAccessibilityVisualSystem: GameSystem = {
       const depth = n / numRows; // 0 at the horizon -> 1 at the bottom, fixed perspective spacing
       const y = horizonY + groundSpan * Math.pow(depth, 2.2);
       if (y > state.height) continue;
-      ctx.strokeStyle = withAlpha(nearColor, (0.06 + depth * 0.14) * boost);
+      ctx.strokeStyle = edgeFadeGradient(ctx, state.width, nearColor, (0.06 + depth * 0.14) * boost);
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(state.width, y);

@@ -155,8 +155,15 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
   update(state: GameState, input: InputState, dt: number) {
     if (state.phase !== 'playing') return;
 
-    // Find the player entity (conventionally kind === 'player' or first entity)
-    const player = state.entities.find((e) => e.kind === 'player') || state.entities[0];
+    // The real player lives in state.player (base_player.ts's own top-level field) — it is
+    // NEVER pushed into state.entities (only obstacles are). The old
+    // `state.entities.find(e => e.kind === 'player') || state.entities[0]` fallback always
+    // failed to find a match and always fell through to state.entities[0] — silently
+    // treating the FIRST OBSTACLE as "the player" and checking it for overlap against every
+    // OTHER obstacle. When two obstacles spawned close enough to overlap, that registered
+    // as a false 'hit' — the collision sound firing for an obstacle/obstacle overlap that
+    // never involved the real player at all.
+    const player = state.player;
     if (!player) return;
 
     // Initialize per-mechanic data if missing
@@ -168,7 +175,6 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
 
     // Check all obstacle / hazard entities against player
     for (const entity of state.entities) {
-      if (entity === player) continue;
       if (entity.kind === 'particle' || entity.kind === 'fx') continue;
 
       // 1. Static/Frame AABB Overlap (TS-0049)
@@ -233,7 +239,7 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
     if (!config || !state.data.debug?.enabled) return;
 
     // Optional subtle debug overlay for precise hitbox visualization when enabled in state.data
-    const player = state.entities.find((e) => e.kind === 'player') || state.entities[0];
+    const player = state.player;
     if (!player) return;
 
     ctx.save();
@@ -243,7 +249,7 @@ const validateCharacterObstacleHitboxSystem: GameSystem = {
 
     // Draw thin obstacle bounding boxes for active inspection
     for (const entity of state.entities) {
-      if (entity === player || entity.kind === 'particle') continue;
+      if (entity.kind === 'particle') continue;
       ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
       ctx.strokeRect(entity.x, entity.y, entity.w, entity.h);
     }

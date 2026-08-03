@@ -31,10 +31,31 @@ const system: GameSystem = {
     state.data.speed = (360 + state.t * 9) * speedMul;
     state.score += state.data.speed * dt * 0.05;
     if (Math.floor(state.score) > state.data.scored) { state.data.scored = Math.floor(state.score); state.events.push('score'); }
-    // Bigger gap factor = rarer spawns (more room between obstacles); smaller = denser.
-    if (Math.random() < 0.02 / gapMul && state.entities.length < 4) {
-      const h = 30 + Math.random() * 26;
-      state.entities.push({ id: Math.random().toString(), kind: 'obstacle', x: state.width + 40, y: gY - h, w: 26, h, vx: 0, vy: 0 });
+    // Obstacle placement must stay mathematically jumpable no matter how the
+    // gravity/gap/speed knobs are set. Derive the actual jump arc from the live
+    // gravity + current scroll speed and clamp obstacle height/width/spacing to
+    // what that arc can clear, rather than trusting the sliders' requested gap
+    // factor at face value — an extreme combo (e.g. high gravity + low speed)
+    // can otherwise ask for a box that's tall enough or a gap tight enough
+    // that no jump timing could ever clear it.
+    const gravityNow = GRAVITY * gravMul;
+    const jumpRise = (JUMP_V * JUMP_V) / (2 * gravityNow); // max height (px) feet reach above ground
+    const jumpAirtime = (2 * Math.abs(JUMP_V)) / gravityNow; // ground-to-ground hang time (s)
+    const jumpSpan = state.data.speed * jumpAirtime; // max ground distance (px) coverable while airborne
+    const REACTION_TIME = 0.18; // seconds a player needs on the ground to see + react + jump again
+    const maxSafeHeight = Math.max(14, jumpRise * 0.65);
+    const maxSafeWidth = Math.max(14, jumpSpan * 0.5);
+    const minGap = REACTION_TIME * state.data.speed + jumpSpan * 0.35;
+    let rightmostEdge = -Infinity;
+    for (const o of state.entities) if (o.kind === 'obstacle') rightmostEdge = Math.max(rightmostEdge, o.x + o.w);
+    const spawnX = state.width + 40;
+    const roomAvailable = rightmostEdge === -Infinity || spawnX - rightmostEdge >= minGap;
+    // Bigger gap factor = rarer spawns (more room between obstacles); smaller = denser —
+    // but roomAvailable is a hard floor the requested gap factor can never shrink past.
+    if (roomAvailable && Math.random() < 0.02 / gapMul && state.entities.length < 4) {
+      const h = Math.min(30 + Math.random() * 26, maxSafeHeight);
+      const w = Math.min(26, maxSafeWidth);
+      state.entities.push({ id: Math.random().toString(), kind: 'obstacle', x: spawnX, y: gY - h, w, h, vx: 0, vy: 0 });
     }
     // This frame's obstacle-clear events — consumed by confetti/audio systems that
     // run later in system order, then discarded (mirrors how state.events works,

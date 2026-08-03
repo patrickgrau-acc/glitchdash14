@@ -84,24 +84,38 @@ export const SCHOOL_APPROVED_PALETTES: Record<string, ColorPalette> = {
   },
 };
 
+const THEME_STORAGE_KEY = 'glitchdash14_theme_id';
+
+function loadThemeId(): string {
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    return stored && SCHOOL_APPROVED_PALETTES[stored] ? stored : 'neon';
+  } catch {
+    return 'neon';
+  }
+}
+
+function saveThemeId(id: string): void {
+  try { localStorage.setItem(THEME_STORAGE_KEY, id); } catch { /* ignore */ }
+}
+
 const ModifyVisualAestheticSettingsSystem: GameSystem = {
   id: 'modify_visual_aesthetic_settings',
   order: 45,
 
   reset(state: GameState): void {
-    if (!state.data.aesthetic) {
-      state.data.aesthetic = {
-        activePaletteId: 'neon',
-        palette: SCHOOL_APPROVED_PALETTES['neon'],
-        availablePalettes: Object.values(SCHOOL_APPROVED_PALETTES),
-        contrastValidated: true,
-        schoolAppropriateOnly: true,
-      };
-    } else {
-      // Retain or re-validate current palette on reset
-      const currentId = state.data.aesthetic.activePaletteId || 'neon';
-      state.data.aesthetic.palette = SCHOOL_APPROVED_PALETTES[currentId] || SCHOOL_APPROVED_PALETTES['neon'];
-    }
+    // Restore the player's last theme instead of hardcoding 'neon' — engine.ts's
+    // startRun() wipes state.data on every restart, so the "if (!state.data.aesthetic)"
+    // branch below always ran (state.data.aesthetic is never actually retained across a
+    // restart), silently resetting the theme every new game regardless of what was picked.
+    const currentId = state.data.aesthetic?.activePaletteId || loadThemeId();
+    state.data.aesthetic = {
+      activePaletteId: currentId,
+      palette: SCHOOL_APPROVED_PALETTES[currentId] || SCHOOL_APPROVED_PALETTES['neon'],
+      availablePalettes: Object.values(SCHOOL_APPROVED_PALETTES),
+      contrastValidated: true,
+      schoolAppropriateOnly: true,
+    };
   },
 
   update(state: GameState, input: InputState, dt: number): void {
@@ -121,6 +135,7 @@ const ModifyVisualAestheticSettingsSystem: GameSystem = {
       state.data.aesthetic.palette = SCHOOL_APPROVED_PALETTES[themeKey];
       state.data.aesthetic.contrastValidated = true;
       state.data.requestedThemeId = undefined;
+      saveThemeId(themeKey);
     }
 
     // Allow keyboard shortcut 'T' to cycle themes for quick live testing in arcade mode
@@ -130,6 +145,7 @@ const ModifyVisualAestheticSettingsSystem: GameSystem = {
       const nextKey = keys[(currentIndex + 1) % keys.length];
       state.data.aesthetic.activePaletteId = nextKey;
       state.data.aesthetic.palette = SCHOOL_APPROVED_PALETTES[nextKey];
+      saveThemeId(nextKey);
       state.events.push(`theme_switched:${nextKey}`);
     }
   },
