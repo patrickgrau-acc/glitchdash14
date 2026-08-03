@@ -1,1 +1,18 @@
-{}
+{
+  "_unclassified": {
+    "frontend": {
+      "screens": [
+        {
+          "name": "Page",
+          "file": "app/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/game/GameCanvas"
+          ],
+          "prop_interfaces": []
+        }
+      ]
+    }
+  }
+}
