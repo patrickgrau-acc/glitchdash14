@@ -1,4 +1,3 @@
-// ── src/game/types.ts ──
 /**
  * Living data model for GlitchDash14 intensity scaling and game mechanics.
  */
