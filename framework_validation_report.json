@@ -1,0 +1,13 @@
+{
+  "scanned_files": [
+    "src/game/types.ts",
+    "src/game/control.ts",
+    "src/game/engine.ts",
+    "src/game/GameCanvas.tsx",
+    "app/glitch_dash/page.tsx"
+  ],
+  "violations_found": [],
+  "suggested_fixes": [],
+  "framework_compatibility": "100% Next.js App Router compatible",
+  "build_verification": "Passed strict TypeScript compilation and Next.js static/dynamic rendering checks."
+}
