@@ -19,9 +19,10 @@ import s11 from './manage_session_progress';
 import s12 from './monitor_performance_for_fairness';
 import s13 from './monitor_player_performance';
 import s14 from './optimize_collision_detection';
-import s15 from './validate_character_obstacle_hitbox';
+import s15 from './start_initial_gameplay_session';
+import s16 from './validate_character_obstacle_hitbox';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
