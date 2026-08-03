@@ -8,7 +8,7 @@ import { GameSystem, GameState, InputState } from '../types';
  * Reacts to game events ('jump', 'score', 'hit', 'over') and respects mute state
  * stored in state.data.audio.muted or toggleable via the 'KeyM' key.
  */
-class GenerateHighEnergyAudioFeedback implements System implements GameSystem {
+class GenerateHighEnergyAudioFeedback implements GameSystem {
   id = 'generate_high_energy_audio_feedback';
   order = 50;
 
