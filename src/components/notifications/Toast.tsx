@@ -17,7 +17,8 @@
  */
 import React, { useEffect, useState } from 'react';
 import { Icon, cn } from '@/components/ui';
-import { getToasts, subscribeToasts, dismissToast, type ToastItem } from './toastStore';
+import { getToasts, subscribeToasts, dismissToast } from './toastStore';
+import type { ToastItem } from './toastStore';
 
 const VARIANT_ICON: Record<string, string> = {
   success: 'CheckCircle2',
