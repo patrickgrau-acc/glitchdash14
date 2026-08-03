@@ -33,6 +33,8 @@ export interface DifficultyConfigSchema {
   MAX_SPEED_CAP: number;
   /** Global gravity multiplier */
   GRAVITY_MULTIPLIER: number;
+  /** Jump force vector strength */
+  JUMP_FORCE?: number;
 }
 
 export interface GameState {
