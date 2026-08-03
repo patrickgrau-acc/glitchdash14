@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlitchDash14 — Official Player's Guide & Wiki</title>
+  <style>
+    :root {
+      --bg: #0d0221;
+      --bg-panel: rgba(25, 8, 48, 0.85);
+      --bg-code: #160733;
+      --text: #f0edff;
+      --text-muted: #b79ce0;
+      --accent-pink: #ff2fd0;
+      --accent-cyan: #00f0ff;
+      --accent-yellow: #fefe33;
+      --border: rgba(255, 47, 208, 0.25);
+      --shadow: 0 0 25px rgba(255, 47, 208, 0.2);
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f2ff;
+      --bg-panel: rgba(255, 255, 255, 0.9);
+      --bg-code: #ebe5ff;
+      --text: #1a0b2e;
+      --text-muted: #5e4685;
+      --accent-pink: #d900a0;
+      --accent-cyan: #0077cc;
+      --accent-yellow: #997700;
+      --border: rgba(217, 0, 160, 0.25);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Top Action Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-panel);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .top-bar a, .top-bar button {
+      background: none;
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .top-bar a:hover, .top-bar button:hover {
+      background: var(--accent-cyan);
+      color: var(--bg);
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    .top-bar .return-btn {
+      border-color: var(--accent-pink);
+      color: var(--accent-pink);
+    }
+    .top-bar .return-btn:hover {
+      background: var(--accent-pink);
+      color: var(--bg);
+      box-shadow: 0 0 12px var(--accent-pink);
+    }
+
+    /* Hero Header */
+    header.hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: radial-gradient(circle at 50% 20%, rgba(42, 10, 74, 0.8) 0%, transparent 70%);
+      border-bottom: 1px dashed var(--border);
+    }
+
+    header.hero h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 8px;
+      color: var(--text);
+      text-shadow: 0 0 15px var(--accent-pink), 0 0 30px var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+
+    header.hero p {
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+
+    /* Layout Wrapper */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      padding: 32px 20px;
+    }
+
+    @media (max-width: 860px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      aside.toc {
+        position: static !important;
+      }
+    }
+
+    /* Sticky Sidebar / TOC */
+    aside.toc {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    aside.toc h3 {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--accent-pink);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .search-box:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+    }
+
+    aside.toc ul {
+      list-style: none;
+    }
+
+    aside.toc li {
+      margin-bottom: 8px;
+    }
+
+    aside.toc a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      display: block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    aside.toc a:hover {
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      padding-left: 12px;
+    }
+
+    /* Main Content Area */
+    main.content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    section.card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    section.card h2 {
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: var(--accent-cyan);
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    section.card h3 {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: var(--accent-pink);
+      margin: 20px 0 10px 0;
+    }
+
+    section.card p, section.card li {
+      color: var(--text);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    section.card ul {
+      padding-left: 20px;
+    }
+
+    /* Quick Start Banner */
+    .quick-start {
+      background: linear-gradient(135deg, rgba(255,47,208,0.1), rgba(0,240,255,0.1));
+      border: 2px solid var(--accent-pink);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .quick-start h2 {
+      color: var(--accent-pink) !important;
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--bg-code);
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    td {
+      background: var(--bg-panel);
+    }
+
+    kbd {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: inherit;
+      color: var(--accent-yellow);
+      font-weight: bold;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .top-bar, aside.toc { display: none !important; }
+      .container { display: block !important; }
+      section.card { border: 1px solid #ccc !important; box-shadow: none !important; background: #fff !important; margin-bottom: 20px; }
+      header.hero { background: none !important; padding: 20px 0 !important; }
+      header.hero h1 { text-shadow: none !important; color: #000 !important; }
+      a { color: #000 !important; text-decoration: underline !important; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Top Navigation & Controls Bar -->
+  <div class="top-bar">
+    <a class="return-btn" href="/">← Return to Game</a>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <span style="font-size: 12px; color: var(--text-muted);">GLITCHDASH14 WIKI</span>
+      <button id="themeToggle" onclick="toggleTheme()">☀️ / 🌙</button>
+    </div>
+  </div>
+
+  <!-- Hero Header -->
+  <header class="hero">
+    <h1>GLITCHDASH14</h1>
+    <p>Official Player's Guide & Interactive Mechanics Wiki</p>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <!-- Sticky Table of Contents & Filter -->
+    <aside class="toc">
+      <h3>Quick Index</h3>
+      <input type="text" id="searchFilter" class="search-box" placeholder="Filter wiki..." oninput="filterWiki()">
+      <ul id="tocList">
+        <li><a href="#quickstart">🚀 30-Second Quick Start</a></li>
+        <li><a href="#controls">🎮 Controls & Input</a></li>
+        <li><a href="#objective">🏆 Objective & Scoring</a></li>
+        <li><a href="#difficulty">📈 Dynamic Difficulty</a></li>
+        <li><a href="#collision">💥 Collision & Hitboxes</a></li>
+        <li><a href="#aesthetic">🎨 Meme Aesthetics & Audio</a></li>
+        <li><a href="#retry">🔄 Instant Retry Loop</a></li>
+        <li><a href="#gameflow">⚡ Game Phases & Loop</a></li>
+        <li><a href="#tips">💡 Tips & Strategy</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content Sections -->
+    <main class="content">
+
+      <!-- Quick Start Section -->
+      <section id="quickstart" class="card quick-start">
+        <h2>How to Play in 30 Seconds</h2>
+        <p style="margin-top: 12px;">GlitchDash14 is a high-energy, browser-based endless runner built for instant action and zero friction. There are no logins, no downloads, and no telemetry.</p>
+        <ul>
+          <li><strong>Start:</strong> Press any key or click/tap anywhere on the canvas to begin running instantly.</li>
+          <li><strong>Survive:</strong> Jump over neon obstacles, dodge hazards, and keep the 'Glitch' character alive as speed ramps up.</li>
+          <li><strong>Score:</strong> Every second survived and obstacle cleared increases your score in real-time. Your session best is saved locally.</li>
+          <li><strong>Retry:</strong> Hit any key or tap immediately upon collision to instantly restart without page refreshes.</li>
+        </ul>
+      </section>
+
+      <!-- Controls Section -->
+      <section id="controls" class="card">
+        <h2>Controls & Input Integration</h2>
+        <p>Engineered for simple, responsive one-button input across both desktop and mobile devices without missing a frame.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Device / Source</th>
+              <th>Action / Input Key</th>
+              <th>Behavior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Desktop Keyboard</td>
+              <td><kbd>Space</kbd> / <kbd>ArrowUp</kbd> / <kbd>W</kbd></td>
+              <td>Triggers jump / vertical dodge action instantly (edge-triggered).</td>
+            </tr>
+            <tr>
+              <td>Desktop Keyboard</td>
+              <td>Any other key</td>
+              <td>Wakes up game from 'Ready' or restarts from 'Game Over' state.</td>
+            </tr>
+            <tr>
+              <td>Touch / Mobile / Mouse</td>
+              <td>Tap or Click on Canvas</td>
+              <td>Triggers jump action and immediately starts/restarts run on touch interaction.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Objective & Scoring Section -->
+      <section id="objective" class="card">
+        <h2>Objective & Comprehensive Scoring</h2>
+        <p>Master the balance of survival time and obstacle avoidance to climb the leaderboards.</p>
+        <h3>Live Score Tracking</h3>
+        <p>Provides a real-time, high-contrast score counter on the HUD that updates instantly as you clear obstacles and progress through sessions.</p>
+        <h3>Final Session Results</h3>
+        <p>Upon collision, the game pauses into an instant summary screen displaying your final score alongside your persistent browser session-best score.</p>
+      </section>
+
+      <!-- Dynamic Difficulty Section -->
+      <section id="difficulty" class="card">
+        <h2>Dynamic Difficulty Scaling Engine</h2>
+        <p>The game adapts in real-time to keep sessions challenging yet fair across all school hardware.</p>
+        <ul>
+          <li><strong>Intensity Scaling Curve:</strong> Automatically adjusts obstacle spawn frequency and global game speed multipliers based on score thresholds.</li>
+          <li><strong>Performance Fairness Monitor:</strong> Continuously checks frame rates (FPS). If performance dips below 60 FPS on low-end hardware, spawn rates are throttled to eliminate stuttering.</li>
+          <li><strong>Smoothing Functions:</strong> Applies linear interpolation and smoothing curves to difficulty adjustments, preventing jarring spikes.</li>
+          <li><strong>Global Tuning Constants:</strong> Centralized configuration parameters allowing rapid game balance adjustments.</li>
+        </ul>
+      </section>
+
+      <!-- Collision Detection Section -->
+      <section id="collision" class="card">
+        <h2>Precise Collision Detection System</h2>
+        <p>Fairness and responsiveness define every frame of interaction.</p>
+        <ul>
+          <li><strong>Hitbox Geometry:</strong> Precise collision boundaries mapped directly to visual assets for fair and responsive gameplay.</li>
+          <li><strong>Optimized Processing:</strong> High-performance detection loops designed to execute in under 0.5ms per frame, ensuring zero input lag.</li>
+          <li><strong>Hitbox Verification:</strong> Validates character-obstacle overlaps within 16ms of frame transitions.</li>
+        </ul>
+      </section>
+
+      <!-- Aesthetic and Audio Section -->
+      <section id="aesthetic" class="card">
+        <h2>Meme-Inspired Visuals & Auditory Environment</h2>
+        <p>Immersive, school-appropriate arcade sensory design.</p>
+        <ul>
+          <li><strong>Neon Vaporwave UI:</strong> High-contrast neon-saturated color palettes and retro arcade aesthetics.</li>
+          <li><strong>Particle Bursts:</strong> Dynamic neon particle emissions triggered on scoring events and obstacle clearance.</li>
+          <li><strong>Screen Shake & Irreverent Messages:</strong> Impact feedback on collision paired with cheeky, meme-inspired game-over text.</li>
+          <li><strong>Audio Mute Toggle:</strong> Persistent audio control enabling silent play during classroom settings.</li>
+        </ul>
+      </section>
+
+      <!-- Instant Retry Section -->
+      <section id="retry" class="card">
+        <h2>Instant Retry & Performance Optimization</h2>
+        <p>Designed for rapid, frictionless trial-and-error sessions.</p>
+        <ul>
+          <li><strong>Instant Gameplay Restart:</strong> Seamless transition from Game Over back to active gameplay without reloading.</li>
+          <li><strong>Object Pooling:</strong> Efficient memory management for obstacle instances to eliminate garbage collection pauses.</li>
+          <li><strong>Persistent Local Storage:</strong> Automatically loads and updates your high score using browser local storage.</li>
+        </ul>
+      </section>
+
+      <!-- Game Flow & Phases Section -->
+      <section id="gameflow" class="card">
+        <h2>Game Flow & Lifecycle States</h2>
+        <p>The core engine transitions smoothly through three primary phases:</p>
+        <ul>
+          <li><strong>Ready Phase:</strong> The initial waiting state displaying instructions and your current high score. Awaiting first user input.</li>
+          <li><strong>Playing Phase:</strong> The active endless runner loop where input handling, physics updates, difficulty scaling, and live score tracking occur at 60 FPS.</li>
+          <li><strong>Over Phase:</strong> Triggered immediately upon collision. Displays final stats, screen-shake feedback, meme commentary, and allows instant retry.</li>
+        </ul>
+      </section>
+
+      <!-- Tips & Strategy Section -->
+      <section id="tips" class="card">
+        <h2>Tips & Pro Strategy</h2>
+        <ul>
+          <li><strong>Rhythm is Key:</strong> Don't just react visually; establish a rhythm with your jumps as speed increases.</li>
+          <li><strong>Watch the Score Thresholds:</strong> Expect difficulty spikes at major score milestones as the intensity curve ramps up speed.</li>
+          <li><strong>Frame Rate Matters:</strong> If playing on constrained school hardware, closing background tabs ensures a stable 60 FPS for precise hitboxes.</li>
+          <li><strong>Instant Recovery:</strong> Mash <kbd>Space</kbd> or tap immediately upon death for lightning-fast training runs.</li>
+        </ul>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    // Theme toggling functionality
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('wiki_theme', newTheme);
+    }
+
+    // Load saved theme preference on start
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('wiki_theme');
+      if (savedTheme) {
+        document.body.setAttribute('data-theme', savedTheme);
+      }
+    });
+
+    // Simple search/filter function for table of contents / wiki sections
+    function filterWiki() {
+      const query = document.getElementById('searchFilter').value.toLowerCase();
+      const sections = document.querySelectorAll('main.content section.card');
+      const links = document.querySelectorAll('#tocList li');
+
+      sections.forEach((sec, idx) => {
+        const text = sec.textContent.toLowerCase();
+        if (text.includes(query)) {
+          sec.style.display = 'block';
+          if (links[idx]) links[idx].style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+          if (links[idx]) links[idx].style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
