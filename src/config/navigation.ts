@@ -56,6 +56,15 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: 'Responsive View', path: '/simple_responsive_one', icon: 'Smartphone' },
     ],
   },
+
+  // Auto-added by shipper: pages missing from navigation config
+  // These entries prevent TypeError crashes during Next.js prerendering
+  {
+    title: 'Additional Pages',
+    items: [
+    { label: 'Page.Tsx', path: '/page.tsx' }
+    ]
+  },
 ];
 
 /** Flat list of all nav items (for route generation). */
