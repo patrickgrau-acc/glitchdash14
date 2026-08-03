@@ -1,1 +1,67 @@
-AIResponse(text="// Implements: SPEC-tgkne6osK1WBh2mTb8ep\n// Satisfies: TS-0119, TS-0120\nimport type { GameSystem, GameState, InputState } from '../types';\n\n/**\n * Configure Feedback Sequence Duration system.\n * Controls death feedback animation timing, ensuring feedback sequences complete\n * within the 500ms - 1000ms window (Hard Cap: 1000ms) without technical lag.\n */\nexport const DEATH_ANIMATION_DURATION = 750; // Milliseconds, tunable between 500ms and 1000ms\n\ninterface DeathFeedbackState {\n  isAnimatingDeath: boolean;\n  deathTimer: number;\n  duration: number;\n}\n\nconst configureFeedbackSequenceSystem: GameSystem = {\n  id: 'configure_feedback_sequence',\n  order: 30,\n\n  reset(state: GameState): void {\n    state.data.deathFeedback = {\n      isAnimatingDeath: false,\n      deathTimer: 0,\n      duration: DEATH_ANIMATION_DURATION,\n    } as DeathFeedbackState;\n  },\n\n  update(state: GameState, _input: InputState, dt: number): void {\n    if (!state.data.deathFeedback) {\n      state.data.deathFeedback = {\n        isAnimatingDeath: false,\n        deathTimer: 0,\n        duration: DEATH_ANIMATION_DURATION,\n      } as DeathFeedbackState;\n    }\n\n    const feedback = state.data.deathFeedback as DeathFeedbackState;\n\n    // Check if player just hit or entered 'over' phase from 'playing'\n    if (state.phase === 'over' && !feedback.isAnimatingDeath && state.events.includes('hit')) {\n      feedback.isAnimatingDeath = true;\n      feedback.deathTimer = 0;\n    }\n\n    if (feedback.isAnimatingDeath) {\n      feedback.deathTimer += dt * 1000; // convert seconds to ms\n      if (feedback.deathTimer >= feedback.duration) {\n        feedback.isAnimatingDeath = false;\n        // Ensure reset loop is ready\n      }\n    }\n\n    // Reset when ready phase starts\n    if (state.phase === 'ready') {\n      feedback.isAnimatingDeath = false;\n      feedback.deathTimer = 0;\n    }\n  },\n\n  render(_ctx: CanvasRenderingContext2D, _state: GameState): void {\n    // Draws nothing for 'over' or 'ready' phases to avoid duplicate rendering.\n  }\n};\n\nexport default configureFeedbackSequenceSystem;", success=True, error=None)
+// Implements: SPEC-tgkne6osK1WBh2mTb8ep
+// Satisfies: TS-0119, TS-0120
+import type { GameSystem, GameState, InputState } from '../types';
+
+/**
+ * Configure Feedback Sequence Duration system.
+ * Controls death feedback animation timing, ensuring feedback sequences complete
+ * within the 500ms - 1000ms window (Hard Cap: 1000ms) without technical lag.
+ */
+export const DEATH_ANIMATION_DURATION = 750; // Milliseconds, tunable between 500ms and 1000ms
+
+interface DeathFeedbackState {
+  isAnimatingDeath: boolean;
+  deathTimer: number;
+  duration: number;
+}
+
+const configureFeedbackSequenceSystem: GameSystem = {
+  id: 'configure_feedback_sequence',
+  order: 30,
+
+  reset(state: GameState): void {
+    state.data.deathFeedback = {
+      isAnimatingDeath: false,
+      deathTimer: 0,
+      duration: DEATH_ANIMATION_DURATION,
+    } as DeathFeedbackState;
+  },
+
+  update(state: GameState, _input: InputState, dt: number): void {
+    if (!state.data.deathFeedback) {
+      state.data.deathFeedback = {
+        isAnimatingDeath: false,
+        deathTimer: 0,
+        duration: DEATH_ANIMATION_DURATION,
+      } as DeathFeedbackState;
+    }
+
+    const feedback = state.data.deathFeedback as DeathFeedbackState;
+
+    // Check if player just hit or entered 'over' phase from 'playing'
+    if (state.phase === 'over' && !feedback.isAnimatingDeath && state.events.includes('hit')) {
+      feedback.isAnimatingDeath = true;
+      feedback.deathTimer = 0;
+    }
+
+    if (feedback.isAnimatingDeath) {
+      feedback.deathTimer += dt * 1000; // convert seconds to ms
+      if (feedback.deathTimer >= feedback.duration) {
+        feedback.isAnimatingDeath = false;
+        // Ensure reset loop is ready
+      }
+    }
+
+    // Reset when ready phase starts
+    if (state.phase === 'ready') {
+      feedback.isAnimatingDeath = false;
+      feedback.deathTimer = 0;
+    }
+  },
+
+  render(_ctx: CanvasRenderingContext2D, _state: GameState): void {
+    // Draws nothing for 'over' or 'ready' phases to avoid duplicate rendering.
+  }
+};
+
+export default configureFeedbackSequenceSystem;
