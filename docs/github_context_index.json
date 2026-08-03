@@ -1,18 +1,23 @@
 {
-  "_unclassified": {
-    "frontend": {
-      "screens": [
-        {
-          "name": "Page",
-          "file": "app/page.tsx",
-          "type": "page",
-          "api_calls": [],
-          "component_imports": [
-            "src/game/GameCanvas"
-          ],
-          "prop_interfaces": []
-        }
-      ]
+  "version": "1.0",
+  "project": "GlitchDash14",
+  "framework": "nextjs",
+  "files": [
+    {
+      "path": "src/game/types.ts",
+      "description": "Living data model for GlitchDash14 intensity scaling and game mechanics."
+    },
+    {
+      "path": "src/game/engine.ts",
+      "description": "Game loop and system orchestration engine."
+    },
+    {
+      "path": "src/game/control.ts",
+      "description": "Input and control handling for desktop and mobile."
+    },
+    {
+      "path": "src/game/GameCanvas.tsx",
+      "description": "React Canvas integration component for GlitchDash14."
     }
-  }
+  ]
 }
