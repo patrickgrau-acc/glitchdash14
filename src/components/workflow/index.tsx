@@ -8,7 +8,7 @@ export interface Step {
   id: string;
   label: string;
   path: string | null;
-  description?: string;
+  description?: string | null;
 }
 
 export interface WorkflowContextType {
