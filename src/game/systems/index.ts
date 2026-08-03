@@ -30,22 +30,23 @@ import s22 from './flush_execution_context';
 import s23 from './implement_debug_mode_real_time';
 import s24 from './implement_screen_shake_feedback';
 import s25 from './initialize_self_contained_runtime';
-import s26 from './manage_engine_state_reset';
-import s27 from './manage_session_progress';
-import s28 from './modify_visual_aesthetic_settings';
-import s29 from './monitor_performance_for_fairness';
-import s30 from './monitor_player_performance';
-import s31 from './optimize_collision_detection';
-import s32 from './present_session_upon_gameplay';
-import s33 from './reset_gameplay_state_container';
-import s34 from './retrieve_local_high_score';
-import s35 from './start_initial_gameplay_session';
-import s36 from './store_session_high_score';
-import s37 from './update_persistent_high_score';
-import s38 from './validate_character_obstacle_hitbox';
-import s39 from './view_session_performance_metrics';
+import s26 from './manage_character_personality';
+import s27 from './manage_engine_state_reset';
+import s28 from './manage_session_progress';
+import s29 from './modify_visual_aesthetic_settings';
+import s30 from './monitor_performance_for_fairness';
+import s31 from './monitor_player_performance';
+import s32 from './optimize_collision_detection';
+import s33 from './present_session_upon_gameplay';
+import s34 from './reset_gameplay_state_container';
+import s35 from './retrieve_local_high_score';
+import s36 from './start_initial_gameplay_session';
+import s37 from './store_session_high_score';
+import s38 from './update_persistent_high_score';
+import s39 from './validate_character_obstacle_hitbox';
+import s40 from './view_session_performance_metrics';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39, s40];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
