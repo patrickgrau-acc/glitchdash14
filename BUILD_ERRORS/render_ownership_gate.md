@@ -5,5 +5,5 @@ Non-blocking quality gate: when a game_mechanic_* task's own file introduces a p
 Checked: 2 | Fixed by LLM: 1 | Fixed by strip: 1 | Unresolved: 0
 
 ## Actions
-- src/game/systems/bypass_death_animation.ts: render() stripped (duplicate full_backdrop for phase 'playing', already owned by src/game/systems/monitor_performance_for_fairness.ts)
-- src/game/systems/bypass_death_animation.ts: LLM rewrite removed duplicate full_backdrop for phase 'over' (already owned by src/game/systems/enable_instant_gameplay_restart.ts)
+- src/game/systems/configure_feedback_sequence.ts: render() stripped (duplicate full_backdrop for phase 'ready', already owned by src/game/systems/start_initial_gameplay_session.ts)
+- src/game/systems/configure_feedback_sequence.ts: LLM rewrite removed duplicate full_backdrop for phase 'over' (already owned by src/game/systems/enable_instant_gameplay_restart.ts)
