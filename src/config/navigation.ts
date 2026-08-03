@@ -40,17 +40,21 @@ export const NAV_SECTIONS: NavSection[] = [
     title: 'Dashboard',
     items: [
       { label: 'Overview', path: '/dashboard', icon: 'LayoutDashboard' },
+      { label: 'GlitchDash', path: '/glitch_dash', icon: 'Gamepad2' },
     ],
   },
-  // ── Feature sections are added below by each feature task ──
-  // Example:
-  // {
-  //   title: 'Landing Pages',
-  //   items: [
-  //     { label: 'Configure', path: '/configure_landing_pages' },
-  //     { label: 'Templates', path: '/configure_landing_pages/templates' },
-  //   ],
-  // },
+  {
+    title: 'Game Features',
+    items: [
+      { label: 'Game State', path: '/game_state_including', icon: 'Activity' },
+      { label: 'Develop Single Page', path: '/develop_single_page', icon: 'Layout' },
+      { label: 'Configure Parameters', path: '/configure_game_parameters', icon: 'Sliders' },
+      { label: 'Deliver Self Contained', path: '/deliver_self_contained', icon: 'Package' },
+      { label: 'Instant Retry', path: '/frictionless_instant_retry', icon: 'RotateCcw' },
+      { label: 'High Energy Design', path: '/design_high_energy', icon: 'Zap' },
+      { label: 'Responsive View', path: '/simple_responsive_one', icon: 'Smartphone' },
+    ],
+  },
 ];
 
 /** Flat list of all nav items (for route generation). */
