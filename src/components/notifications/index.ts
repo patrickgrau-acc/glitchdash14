@@ -9,5 +9,5 @@
  * @exports useToast, ToastViewport, ToastVariant, ToastOptions
  */
 export { useToast } from './useToast';
-export { ToastViewport } from './Toast';
+export { ToastViewport, ToastProvider } from './Toast';
 export type { ToastVariant, ToastOptions, ToastItem } from './toastStore';
