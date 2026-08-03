@@ -33,17 +33,21 @@ const system: GameSystem = {
     state.data.isSelfContainedVerified = true;
     state.data.offlineModeReady = true;
 
-    // Load and synchronize high score from localStorage for zero-server persistence
-    try {
-      const savedBest = localStorage.getItem('glitchdash14_best');
-      if (savedBest !== null) {
-        const parsed = parseInt(savedBest, 10);
-        if (!isNaN(parsed) && parsed > state.best) {
-          state.best = parsed;
+    // Load and synchronize high score from localStorage for zero-server persistence.
+    // Skipped during SSR (no `window`/`localStorage` on the server) rather than caught —
+    // that path is expected on every server render, not an anomaly worth warning about.
+    if (typeof window !== 'undefined') {
+      try {
+        const savedBest = localStorage.getItem('glitchdash14_best');
+        if (savedBest !== null) {
+          const parsed = parseInt(savedBest, 10);
+          if (!isNaN(parsed) && parsed > state.best) {
+            state.best = parsed;
+          }
         }
+      } catch (e) {
+        console.warn('LocalStorage unavailable, running in memory-only mode.', e);
       }
-    } catch (e) {
-      console.warn('LocalStorage unavailable, running in memory-only mode.', e);
     }
   },
 

@@ -9,9 +9,19 @@ import { GameSystem, GameState, InputState } from '../types';
  * - Smooths background asset motion (grid lines, floating meme particles/stars) for visual comfort.
  */
 interface VisualAccessibilityData {
-  patternOffset: number;
+  farOffset: number;
+  midOffset: number;
+  nearOffset: number;
   pulsePhase: number;
   highContrastMode: boolean;
+}
+
+function withAlpha(hex: string, alpha: number): string {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.length === 3 ? h[0] + h[0] : h.slice(0, 2), 16);
+  const g = parseInt(h.length === 3 ? h[1] + h[1] : h.slice(2, 4), 16);
+  const b = parseInt(h.length === 3 ? h[2] + h[2] : h.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
 const validateAccessibilityVisualSystem: GameSystem = {
@@ -20,7 +30,9 @@ const validateAccessibilityVisualSystem: GameSystem = {
 
   reset(state: GameState) {
     state.data.visualAccessibility = {
-      patternOffset: 0,
+      farOffset: 0,
+      midOffset: 0,
+      nearOffset: 0,
       pulsePhase: 0,
       highContrastMode: true,
     } as VisualAccessibilityData;
@@ -28,15 +40,24 @@ const validateAccessibilityVisualSystem: GameSystem = {
 
   update(state: GameState, input: InputState, dt: number) {
     const data = (state.data.visualAccessibility = state.data.visualAccessibility || {
-      patternOffset: 0,
+      farOffset: 0,
+      midOffset: 0,
+      nearOffset: 0,
       pulsePhase: 0,
       highContrastMode: true,
     }) as VisualAccessibilityData;
 
-    // Update background assets motion for visual comfort (TS-0086)
-    // Ensures scrolling background grid/stars move smoothly without inducing discomfort
-    const speedMultiplier = state.data.globalSpeedMultiplier || 1.0;
-    data.patternOffset = (data.patternOffset + dt * 45 * speedMultiplier) % 100;
+    // Parallax background only advances while the run is actually in motion, driven by
+    // base_player.ts's real world-scroll speed (state.data.speed, already folded through
+    // the difficulty curve's globalSpeedMultiplier) rather than wall-clock dt alone — so it
+    // never drifts on the ready/game-over screens and always tracks live difficulty (TS-0086).
+    if (state.phase === 'playing') {
+      const worldSpeed = state.data.speed ?? 0;
+      // Three depth layers scroll at different fractions of world speed for parallax.
+      data.farOffset = (data.farOffset + worldSpeed * dt * 0.05) % 2000;
+      data.midOffset = (data.midOffset + worldSpeed * dt * 0.22) % 2000;
+      data.nearOffset = (data.nearOffset + worldSpeed * dt * 0.9) % 2000;
+    }
     data.pulsePhase = (data.pulsePhase + dt * 4) % (Math.PI * 2);
 
     // Toggle high-contrast / symbol accessibility mode if 'KeyH' is pressed
@@ -50,21 +71,120 @@ const validateAccessibilityVisualSystem: GameSystem = {
     const data = state.data.visualAccessibility as VisualAccessibilityData;
     if (!data) return;
 
-    // Render accessible background motion patterns (grid lines for visual depth & comfort - TS-0086)
+    // Multi-layer synthwave horizon parallax (TS-0086) — replaces the old flat scrolling
+    // vertical-line grid. Three depth layers (distant ridge, mid sky bands, near angled
+    // floor grid) drift at different fractions of world speed, converging toward a single
+    // vanishing point on the horizon for an immersive angled-perspective effect.
+    const palette = state.data.aesthetic?.palette;
+    const nearColor = palette?.accent || '#00f0ff';
+    // Deliberately NOT palette.primary — base_player.ts (locked) uses that exclusively for
+    // the player character. Sharing it here made the mountain and the player the same
+    // color, which is part of why a jump into the horizon band read as "going through" it.
+    const farColor = palette?.accent || '#00f0ff';
+    const boost = data.highContrastMode ? 1 : 0.5;
+    const horizonY = state.height * 0.58;
+    const vanishX = state.width / 2;
+
     ctx.save();
-    ctx.strokeStyle = data.highContrastMode ? 'rgba(0, 255, 200, 0.15)' : 'rgba(255, 255, 255, 0.08)';
+
+    // Layer 1 (farthest, slowest parallax): soft horizon glow ("digital sun") occluded by
+    // a solid drifting ridge silhouette — the sun must not shine through the mountain or
+    // bleed past the horizon into the ground grid below it.
+    const sunRadius = state.width * 0.35;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, horizonY - sunRadius, state.width, sunRadius); // clip to the sky, stops exactly at the horizon
+    ctx.clip();
+    const sun = ctx.createRadialGradient(vanishX, horizonY, 0, vanishX, horizonY, sunRadius);
+    sun.addColorStop(0, withAlpha(farColor, 0.28 * boost));
+    sun.addColorStop(1, withAlpha(farColor, 0));
+    ctx.fillStyle = sun;
+    ctx.fillRect(0, horizonY - sunRadius, state.width, sunRadius);
+    ctx.restore();
+
+    // Solid mountain silhouette, filled (not stroked) down to the horizon so it actually
+    // blocks the sun's glow behind it rather than letting it shine through an outline.
+    const ridgeStep = 60;
+    const ridgeStart = -(data.farOffset % ridgeStep) - ridgeStep;
+    ctx.fillStyle = withAlpha(farColor, Math.min(1, 0.55 + 0.45 * boost));
+    ctx.beginPath();
+    ctx.moveTo(ridgeStart, horizonY);
+    for (let x = ridgeStart; x <= state.width + ridgeStep; x += ridgeStep) {
+      const ridgeY = horizonY - 10 - Math.abs(Math.sin((x + data.farOffset) * 0.01)) * 18;
+      ctx.lineTo(x, ridgeY);
+    }
+    ctx.lineTo(state.width + ridgeStep, horizonY);
+    ctx.closePath();
+    ctx.fill();
+
+    // Layer 2 (mid): sparse bands receding above the horizon into the sky.
+    ctx.strokeStyle = withAlpha(nearColor, 0.1 * boost);
+    ctx.lineWidth = 1;
+    for (let i = 1; i <= 4; i++) {
+      const y = horizonY - i * 14 - (data.midOffset % 14);
+      if (y < 0) continue;
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(state.width, y); ctx.stroke();
+    }
+
+    // Horizon line — the vanishing point every angled grid line below converges toward.
+    ctx.strokeStyle = withAlpha(nearColor, 0.32 * boost);
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, horizonY); ctx.lineTo(state.width, horizonY); ctx.stroke();
+
+    // Layer 3 (nearest, fastest parallax): ONE angled floor grid, not two overlaid ones.
+    // Rows are plain full-width horizontal lines — a line spanning the entire canvas has
+    // no visible x-position to animate, so they stay fixed (this is what gives the
+    // non-linear horizon-hugging perspective spacing). The columns are what actually
+    // carries the lateral motion: they slide right-to-left and wrap, like lane markers
+    // sliding past, while still converging on the same fixed vanishing point.
+    const numCols = 10;
+    const colSpan = state.width * 1.6;
+    const colSpacing = colSpan / numCols;
+    const colShift = data.nearOffset % colSpacing;
+    ctx.strokeStyle = withAlpha(nearColor, 0.18 * boost);
     ctx.lineWidth = 1.5;
-    const gridSize = 40;
-    const startX = -(data.patternOffset % gridSize);
-    
-    // Draw subtle vertical grid lines
-    for (let x = startX; x < state.width; x += gridSize) {
+    ctx.beginPath();
+    for (let i = -1; i <= numCols + 1; i++) {
+      const bottomX = i * colSpacing - state.width * 0.3 - colShift;
+      ctx.moveTo(vanishX, horizonY);
+      ctx.lineTo(bottomX, state.height);
+    }
+    ctx.stroke();
+
+    const numRows = 6;
+    const groundSpan = state.height - horizonY;
+    for (let n = 1; n <= numRows; n++) {
+      const depth = n / numRows; // 0 at the horizon -> 1 at the bottom, fixed perspective spacing
+      const y = horizonY + groundSpan * Math.pow(depth, 2.2);
+      if (y > state.height) continue;
+      ctx.strokeStyle = withAlpha(nearColor, (0.06 + depth * 0.14) * boost);
       ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, state.height);
+      ctx.moveTo(0, y);
+      ctx.lineTo(state.width, y);
       ctx.stroke();
     }
+
     ctx.restore();
+
+    // Re-assert the player above the mountain/grid backdrop. base_player.ts (order 0,
+    // locked) draws the player BEFORE this system (order 60) paints the parallax layers
+    // over the whole canvas — a jump arcing into the horizon band (a normal jump easily
+    // clears it: ~140px peak height vs. a horizon set at 58% of a 480px-tall canvas) would
+    // otherwise get painted over by the solid mountain fill and look like it went behind
+    // it. Redrawing it here (read-only — base_player still owns the player's actual state)
+    // keeps the character in the foreground at any jump height, in its own primary color
+    // that no longer overlaps the mountain/grid's accent color above.
+    const p = state.player;
+    if (p) {
+      const playerColor = palette?.primary || '#ff2fd0';
+      ctx.save();
+      ctx.shadowColor = playerColor;
+      ctx.shadowBlur = 18;
+      ctx.fillStyle = playerColor;
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+      ctx.shadowBlur = 0;
+      ctx.restore();
+    }
 
     // Enhance entity rendering with distinct silhouettes, patterns, and icons so information
     // is never conveyed by color alone (TS-0075, TS-0085).

@@ -1,10 +1,10 @@
 // Implements: SPEC-042 (implicit vertical dodge mechanics), TS-0011, TS-0016, TS-0021
-// Satisfies: Vertical dodge input processing and responsive character movement for Up and Down arrow keys.
+// Satisfies: Vertical dodge input processing and responsive character movement for Up (KeyE) and Down (ArrowDown/KeyS) dodge keys.
 
 import { GameSystem, GameState, InputState } from '../types';
 
 /**
- * System that enables vertical dodge input (Up and Down arrow keys or W/S keys)
+ * System that enables vertical dodge input (KeyE for up, ArrowDown/KeyS for down)
  * for the Glitch character, allowing responsive vertical evasion maneuvers
  * while preserving core movement and game loop consistency.
  */
@@ -35,9 +35,10 @@ const enableVerticalDodgeInputSystem: GameSystem = {
 
     const dodge = state.data.verticalDodge;
 
-    // Check for Up arrow or KeyW for upward dodge
-    const upPressed = input.justPressed.has('ArrowUp') || input.justPressed.has('KeyW');
-    // Check for Down arrow or KeyS for downward dodge
+    // Dedicated key — was 'ArrowUp'/'KeyW', which collided with jump (base_player.ts):
+    // every jump also fired an upward dodge on the same keypress.
+    const upPressed = input.justPressed.has('KeyE');
+    // Check for Down arrow or KeyS for downward dodge (no collision — jump doesn't use these)
     const downPressed = input.justPressed.has('ArrowDown') || input.justPressed.has('KeyS');
 
     const dodgeDistance = 45; // Pixels to shift vertically for a dodge maneuver

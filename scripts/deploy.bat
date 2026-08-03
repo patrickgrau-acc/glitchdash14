@@ -1,9 +1,24 @@
 @echo off
 setlocal
 
-set PROJECT=glitchdash14-f65bec7c
-set SERVICE=glitchdash14-staging
-set REGION=us-central1
+rem Project/service identifiers are deliberately NOT hardcoded here (this script is
+rem tracked in a public repo) — set them once in your own shell/profile before running:
+rem   set GLITCHDASH_GCP_PROJECT=your-project-id
+rem   set GLITCHDASH_GCP_SERVICE=your-service-name
+rem   set GLITCHDASH_GCP_REGION=us-central1   (optional, defaults below)
+if "%GLITCHDASH_GCP_PROJECT%"=="" (
+    echo ERROR: GLITCHDASH_GCP_PROJECT is not set. See comments in this script.
+    exit /b 1
+)
+if "%GLITCHDASH_GCP_SERVICE%"=="" (
+    echo ERROR: GLITCHDASH_GCP_SERVICE is not set. See comments in this script.
+    exit /b 1
+)
+
+set PROJECT=%GLITCHDASH_GCP_PROJECT%
+set SERVICE=%GLITCHDASH_GCP_SERVICE%
+set REGION=%GLITCHDASH_GCP_REGION%
+if "%REGION%"=="" set REGION=us-central1
 
 rem Run from anywhere; always build from the repo root (parent of this scripts/ folder).
 set REPO_ROOT=%~dp0..
@@ -28,6 +43,6 @@ if %DEPLOY_RESULT% neq 0 (
 )
 
 echo.
-echo Deploy succeeded.
-echo Live URL: https://glitchdash14-staging-ptehkqlioa-uc.a.run.app/
+echo Deploy succeeded. Fetch the live URL with:
+echo   gcloud run services describe %SERVICE% --project %PROJECT% --region %REGION% --format "value(status.url)"
 endlocal

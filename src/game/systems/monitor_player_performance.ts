@@ -19,6 +19,7 @@ interface PerformanceMonitorData {
   currentFps: number;
   smoothedFrameTime: number;
   gracePeriodTimer: number;
+  lastSurvivalTierSignaled: number;
 }
 
 const monitorPlayerPerformanceSystem: GameSystem = {
@@ -36,12 +37,13 @@ const monitorPlayerPerformanceSystem: GameSystem = {
       currentFps: 60,
       smoothedFrameTime: 16.67,
       gracePeriodTimer: 0,
+      lastSurvivalTierSignaled: -1,
     } as PerformanceMonitorData;
 
-    // Reset difficulty config and intensity metrics cleanly on restart (TS-0059)
-    state.data.intensity = 1.0;
-    state.data.globalSpeedMultiplier = 1.0;
-    state.data.hardCapReached = false;
+    // Note: does NOT reset state.data.globalSpeedMultiplier/intensity/hardCapReached —
+    // those are owned by configure_intensity_scaling_curve.ts/apply_smoothing_functions.ts
+    // (order 10/25, reset() runs before this system's at order 35). This system only
+    // layers a temporary fairness dip on top of their baseline; it must not clobber it.
   },
 
   update(state: GameState, input: InputState, dt: number): void {
@@ -90,33 +92,39 @@ const monitorPlayerPerformanceSystem: GameSystem = {
     // Prune collision history older than 10 seconds for rolling frequency window
     monitor.recentCollisions = monitor.recentCollisions.filter(t => now - t <= 10.0);
 
-    // Evaluate collision frequency versus current difficulty (TS-0052)
-    const currentIntensity = state.data.intensity || 1.0;
+    // Evaluate collision frequency versus current difficulty (TS-0052) — reads the
+    // ACTUAL applied difficulty (configure_intensity_scaling_curve.ts +
+    // apply_smoothing_functions.ts, order 10/25, already ran earlier this frame),
+    // not an independently-tracked value that could disagree with it.
+    const currentDifficulty = state.data.globalSpeedMultiplier ?? 1.0;
     const rollingCollisionRate = monitor.recentCollisions.length;
 
-    // If player experiences excessive collisions while intensity is high, trigger grace period stabilization
-    if (rollingCollisionRate >= 3 && currentIntensity > 1.3 && monitor.gracePeriodTimer <= 0) {
+    // If player experiences excessive collisions while difficulty is high, trigger grace period stabilization
+    if (rollingCollisionRate >= 3 && currentDifficulty > 1.3 && monitor.gracePeriodTimer <= 0) {
       monitor.performanceWarning = 'STABILIZING DIFFICULTY (HIGH COLLISION FREQUENCY)';
       monitor.intensityControllerPaused = true;
       state.data.intensityControllerPaused = true;
       monitor.gracePeriodTimer = 4.0; // 4 second grace period with minor stabilization
-
-      // Apply temporary stabilization dip to intensity
-      state.data.intensity = Math.max(1.0, currentIntensity - 0.25);
-      state.data.globalSpeedMultiplier = Math.max(1.0, (state.data.globalSpeedMultiplier || 1.0) - 0.2);
-      
       state.events.push('difficulty_stabilized');
     }
 
-    // Progressive difficulty scaling based on survival duration (TS-0065)
-    // Every 30 seconds of survival without major distress scales up the intensity factor smoothly
-    const targetIntensity = 1.0 + Math.floor(monitor.survivalTime / 30) * 0.25 + (monitor.survivalTime * 0.01);
-    const maxCap = 3.5;
+    // Apply a temporary fairness dip ON TOP of the score-based baseline while the grace
+    // period is active — this system's genuine value-add (TS-0052), layered instead of
+    // replacing configure_intensity_scaling_curve.ts/apply_smoothing_functions.ts's curve.
+    if (monitor.intensityControllerPaused) {
+      state.data.globalSpeedMultiplier = Math.max(1.0, (state.data.globalSpeedMultiplier ?? 1.0) * 0.85);
+    }
 
-    if (!monitor.intensityControllerPaused) {
-      const clampedIntensity = Math.min(maxCap, targetIntensity);
-      state.data.intensity = clampedIntensity;
-      state.data.globalSpeedMultiplier = 1.0 + (clampedIntensity - 1.0) * 0.5;
+    // Survival-duration difficulty escalation (TS-0065): "signal the environment to scale
+    // incrementally" per this system's own acceptance criteria — pushed as an event rather
+    // than by independently overwriting state.data.globalSpeedMultiplier, since that field
+    // is already owned by the score-threshold curve above; a second, uncoordinated writer
+    // here previously just clobbered whichever system ran first, every frame (the same
+    // class of bug as control.ts's phase-ownership fix).
+    const survivalTier = Math.floor(monitor.survivalTime / 30);
+    if (survivalTier > monitor.lastSurvivalTierSignaled) {
+      monitor.lastSurvivalTierSignaled = survivalTier;
+      state.events.push('difficulty_milestone_survived');
     }
 
     // Expose metrics for other systems and HUD integration

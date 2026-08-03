@@ -53,7 +53,7 @@ DELIVERABLES:
 
 **New files**
 - `.claude/launch.json` — dev server preview config (`npm run dev`, port 3000).
-- `scripts/deploy.bat` — one-command redeploy to the `glitchdash14-staging` Cloud Run service in project `glitchdash14-f65bec7c`.
+- `scripts/deploy.bat` — one-command redeploy to the project's Cloud Run staging service (project/service identifiers are set via local environment variables, not hardcoded — see the script's comments).
 
 ## Result
 
@@ -62,7 +62,7 @@ DELIVERABLES:
 - During verification of that panel, found and fixed the session's most consequential bug: `control.ts`'s phase-ownership registry gave the `'playing'` phase to a system that never touches score or phase, silently freezing the score at 0 for the life of the build via the engine's own ownership-sandbox mechanism. One-line fix, verified by code review (live rAF-driven verification wasn't possible through the available browser automation tooling — its tab reports `document.hidden: true` regardless of front/focus state — so this warrants a direct playtest).
 - Wired three previously-decorative settings (Speed/Gap/Gravity sliders, and separately the Theme palette) into `base_player.ts`, the only system that owns physics/spawn/render — none of them, nor the ~9 "difficulty scaling" systems that computed inputs for them, had ever actually been read by the core loop.
 - Retargeted the score-tick confetti/sound to fire on genuine obstacle-clear events instead, with confetti centered on the specific obstacle and drifting off with it.
-- Deployed the mid-session state to Cloud Run (`glitchdash14-staging`, revision `-00002-nbn`) once; later fixes (control.ts, panel wiring, confetti/sound, screen dedup round 2) are committed to the working tree but not yet redeployed as of this task file being written — run `scripts\deploy.bat` to ship them.
+- Deployed the mid-session state to the Cloud Run staging service once; later fixes (control.ts, panel wiring, confetti/sound, screen dedup round 2) are committed to the working tree but not yet redeployed as of this task file being written — run `scripts\deploy.bat` to ship them.
 
 ## Known follow-ups (not yet actioned — flagged during review, out of scope for this pass)
 
@@ -72,4 +72,4 @@ DELIVERABLES:
 - `enable_instant_gameplay_restart.ts`'s `update()` independently reassigns `state.phase`/`score`/`entities`/`t` on restart input, duplicating what `GameCanvas.tsx`'s `begin()` already does — likely dead-on-arrival under the ownership sandbox (same class of bug as the control.ts fix above, but for a mechanic that isn't the phase owner), not confirmed or fixed this session.
 
 ---
-*Written during an interactive session with the repository owner (patrick.grau@acc3int.com) · not part of the original CrewAI App Builder pipeline · 2026-08-03*
+*Written during an interactive session with the repository owner · not part of the original CrewAI App Builder pipeline · 2026-08-03*
