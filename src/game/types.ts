@@ -46,7 +46,7 @@ export interface GameState {
   height: number;
   entities: Entity[];
   events: string[];
-  /** Permissive scratchpad for active game systems and tuning parameters. Includes highScoreRetrieved flag for local high score mechanics. */
+  /** Permissive scratchpad for active game systems and tuning parameters. Includes highScoreRetrieved flag for local high score mechanics and self-contained offline runtime flags. */
   data: Record<string, any>;
 }
 
