@@ -1,27 +1,20 @@
-# Implements: GlitchDash14 GCP Cloud Run Production Deployment
-FROM node:20-alpine AS builder
+# Stage 1: Build Next.js (standalone output, no Python)
+FROM node:20-alpine AS build
 WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
+RUN npm install --legacy-peer-deps 2>/dev/null || npm install
 COPY . .
-ENV NEXT_TELEMETRY_DISABLED 1
+RUN mkdir -p public
 RUN npm run build
 
-FROM node:20-alpine AS runner
+# Stage 2: Serve with the Next.js standalone node server
+FROM node:20-alpine
 WORKDIR /app
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-EXPOSE 8000
-ENV PORT 8000
-ENV HOSTNAME "0.0.0.0"
-
+ENV NODE_ENV=production
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
