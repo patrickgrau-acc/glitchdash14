@@ -24,24 +24,25 @@ import s16 from './construct_self_contained_deployment';
 import s17 from './display_live_score_during_gameplay';
 import s18 from './enable_instant_gameplay_restart';
 import s19 from './enable_vertical_dodge_input';
-import s20 from './implement_debug_mode_real_time';
-import s21 from './implement_screen_shake_feedback';
-import s22 from './initialize_self_contained_runtime';
-import s23 from './manage_engine_state_reset';
-import s24 from './manage_session_progress';
-import s25 from './modify_visual_aesthetic_settings';
-import s26 from './monitor_performance_for_fairness';
-import s27 from './monitor_player_performance';
-import s28 from './optimize_collision_detection';
-import s29 from './present_session_upon_gameplay';
-import s30 from './retrieve_local_high_score';
-import s31 from './start_initial_gameplay_session';
-import s32 from './store_session_high_score';
-import s33 from './update_persistent_high_score';
-import s34 from './validate_character_obstacle_hitbox';
-import s35 from './view_session_performance_metrics';
+import s20 from './flush_execution_context';
+import s21 from './implement_debug_mode_real_time';
+import s22 from './implement_screen_shake_feedback';
+import s23 from './initialize_self_contained_runtime';
+import s24 from './manage_engine_state_reset';
+import s25 from './manage_session_progress';
+import s26 from './modify_visual_aesthetic_settings';
+import s27 from './monitor_performance_for_fairness';
+import s28 from './monitor_player_performance';
+import s29 from './optimize_collision_detection';
+import s30 from './present_session_upon_gameplay';
+import s31 from './retrieve_local_high_score';
+import s32 from './start_initial_gameplay_session';
+import s33 from './store_session_high_score';
+import s34 from './update_persistent_high_score';
+import s35 from './validate_character_obstacle_hitbox';
+import s36 from './view_session_performance_metrics';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
