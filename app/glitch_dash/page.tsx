@@ -1,6 +1,7 @@
+"use client";
+
 // Implements: SPEC-053, SPEC-054, SPEC-055, SPEC-056, SPEC-057
 // Satisfies: TS-001, TS-002, TS-003, TS-004, TS-005
-"use client";
 
 import React from 'react';
 import GameCanvas from '@/game/GameCanvas';
