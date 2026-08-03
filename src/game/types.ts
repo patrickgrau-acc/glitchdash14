@@ -1,5 +1,5 @@
-// ── src/game/types.ts ──
 /**
+ * ── src/game/types.ts ──
  * Extended living data model for GlitchDash14 intensity scaling mechanics
  * Includes difficulty configuration tracking for centralized constant enforcement
  * and self-contained deployment configuration support.
