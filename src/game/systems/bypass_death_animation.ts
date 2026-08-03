@@ -81,13 +81,7 @@ class BypassDeathAnimationSystem implements GameSystem {
   }
 
   render(ctx: CanvasRenderingContext2D, state: GameState): void {
-    // If death animation was bypassed, we can render a brief glitch/flash indicator if desired
-    if (state.data.deathBypassed && state.phase === 'over') {
-      ctx.save();
-      ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
-      ctx.fillRect(0, 0, state.width, state.height);
-      ctx.restore();
-    }
+    /* removed by render-ownership gate: duplicate full_backdrop for phase 'playing', already owned by src/game/systems/monitor_performance_for_fairness.ts */
   }
 }
 
