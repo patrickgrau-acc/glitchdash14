@@ -13,12 +13,13 @@ import s5 from './configure_global_difficulty';
 import s6 from './configure_intensity_scaling_curve';
 import s7 from './configure_precise_collision_hitbox';
 import s8 from './display_live_score_during_gameplay';
-import s9 from './monitor_performance_for_fairness';
-import s10 from './monitor_player_performance';
-import s11 from './optimize_collision_detection';
-import s12 from './validate_character_obstacle_hitbox';
+import s9 from './implement_screen_shake_feedback';
+import s10 from './monitor_performance_for_fairness';
+import s11 from './monitor_player_performance';
+import s12 from './optimize_collision_detection';
+import s13 from './validate_character_obstacle_hitbox';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
