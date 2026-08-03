@@ -1,8 +1,5 @@
-// ── src/game/types.ts ──
 /**
- * Extended living data model for GlitchDash14 intensity scaling mechanics
- * Includes difficulty configuration tracking for centralized constant enforcement
- * and self-enced deployment configuration support.
+ * Living data model for GlitchDash14 intensity scaling and game mechanics.
  */
 
 export type Phase = 'ready' | 'playing' | 'over';
@@ -46,7 +43,7 @@ export interface GameState {
   height: number;
   entities: Entity[];
   events: string[];
-  /** Permissive scratchpad for active game systems and tuning parameters. Includes highScoreRetrieved flag for local high score mechanics, feedback duration settings, and self-contained offline runtime flags. */
+  /** Permissive scratchpad for active game systems and tuning parameters. Includes restartTriggered flag for session restart handling. */
   data: Record<string, any>;
 }
 
