@@ -66,7 +66,7 @@ const validateMultiPlatformPerformanceSystem: GameSystem = {
   update(state: GameState, input: InputState, dt: number): void {
     let metrics = state.data.validateMultiPlatformPerformance;
     if (!metrics) {
-      this.reset(state);
+      validateMultiPlatformPerformanceSystem.reset(state);
       metrics = state.data.validateMultiPlatformPerformance;
     }
 
