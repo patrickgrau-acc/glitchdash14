@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { MainLayout } from '@/components/layout';
 import { ToastProvider } from '@/components/notifications';
 
 export const metadata: Metadata = {
@@ -17,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-surface text-text antialiased">
         <ToastProvider>
-          <MainLayout>{children}</MainLayout>
+          <>{children}</>
         </ToastProvider>
       </body>
     </html>
