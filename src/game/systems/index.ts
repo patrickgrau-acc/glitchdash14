@@ -7,9 +7,10 @@ import type { GameSystem } from '../types';
 import s0 from './base_player';
 import s1 from './calculate_display_final_session';
 import s2 from './configure_intensity_scaling_curve';
-import s3 from './monitor_performance_for_fairness';
+import s3 from './display_live_score_during_gameplay';
+import s4 from './monitor_performance_for_fairness';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
