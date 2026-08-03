@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-08-03T02:57:12.327158+00:00",
+  "generated_at": "2026-08-03T03:01:22.191252+00:00",
   "barrels": {
     "@/components/workflow": {
       "barrel_file": "src/components/workflow/index.tsx",
