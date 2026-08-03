@@ -53,8 +53,10 @@ function sweepAABB(
 
   // Broadphase check using Minkowski difference expanded bounding box
   // Expand obstacle by player dimensions
-  const xInvEntry: number, yInvEntry: number;
-  const xInvExit: number, yInvExit: number;
+  let xInvEntry = 0;
+  let yInvEntry = 0;
+  let xInvExit = 0;
+  let yInvExit = 0;
 
   // Determine entry and exit times for x and y axes
   let xEntry = 0;
