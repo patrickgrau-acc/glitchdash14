@@ -41,6 +41,7 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: 'Overview', path: '/dashboard', icon: 'LayoutDashboard' },
       { label: 'GlitchDash', path: '/glitch_dash', icon: 'Gamepad2' },
+      { label: 'System Status', path: '/health.html', icon: 'Activity' },
     ],
   },
   {
