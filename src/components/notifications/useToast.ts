@@ -17,7 +17,7 @@
  * @consumes showToast, dismissToast from ./toastStore
  */
 import { useCallback } from 'react';
-import { showToast, dismissToast, type ToastOptions } from './toastStore';
+import { showToast, dismissToast, ToastOptions } from './toastStore';
 
 export function useToast(): {
   toast: (options: ToastOptions) => string;
