@@ -52,5 +52,5 @@ class PresentSessionSummarySystem implements GameSystem {
   }
 }
 
-const presentSessionSummarySystem = new PresentSessionSummarySystem();
+export const presentSessionSummarySystem = new PresentSessionSummarySystem();
 export default presentSessionSummarySystem;
