@@ -12,6 +12,6 @@ Game systems audit: 10 violation(s) (competing_owner×9, undeclared_field×1) ac
 - src/game/systems/configure_object_pooling_obstacles.ts:80 `state.entities =`
 - src/game/systems/manage_engine_state_reset.ts:17 `state.score =`
 - src/game/systems/manage_engine_state_reset.ts:19 `state.entities =`
-- src/game/systems/bypass_death_animation.ts:64 `state.phase =`
+- src/game/systems/bypass_death_animation.ts:1 `state.phase =`
 
 The core loop owns state.entities, physics, collision, and win/lose. Mechanics must READ state and emit/consume state.events — not reassign state.entities.
