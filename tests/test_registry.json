@@ -1,0 +1,1238 @@
+{
+  "workflow_id": "f65bec7c-8afc-40ec-80c8-e984b412ff3a",
+  "summary": {
+    "total_scripts": 122,
+    "covered": 0,
+    "uncovered": 122,
+    "coverage_pct": 0.0,
+    "test_files": 0,
+    "orphan_test_files": 0
+  },
+  "run_commands": [
+    "# No test runner detected \u2014 see tests/ for the suite."
+  ],
+  "scripts": [
+    {
+      "id": "TS-0000",
+      "name": "Verify the initiation of a gameplay session via keyboard input",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Core Gameplay Loop and Progression",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0001",
+      "name": "Verify unified Jump action response to desktop keyboard and mouse inputs on Chromebook",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Input and Control Responsiveness",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0002",
+      "name": "Verify persistent mute status across application reloads",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Aesthetic and Audio Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0003",
+      "name": "Verify screen shake triggers correctly upon Glitch character collision with an obstacle",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Aesthetic and Audio Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0004",
+      "name": "Verify live updates of balance constants on browser reload",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0005",
+      "name": "Verify unified Jump action response to screen tap inputs on mobile devices",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Input and Control Responsiveness",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0006",
+      "name": "Verify visibility and structure of balance parameters in source code",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0007",
+      "name": "Verify continuous environment scrolling and scoring during active game session",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Core Gameplay Loop and Progression",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0008",
+      "name": "Verify session behavior upon reaching target session duration",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Core Gameplay Loop and Progression",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0009",
+      "name": "Verify particle burst emission and DOM cleanup upon successful obstacle clearance",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Aesthetic and Audio Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0010",
+      "name": "Verify developer-friendly configuration constants",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Browser-Based Deployment Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0011",
+      "name": "Verify that pressing the Down arrow key triggers a vertical dodge maneuver while maintaining core movement consistency.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Input and Control Responsiveness",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0012",
+      "name": "Verify Debug Mode overlay visibility and real-time variable reporting",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0013",
+      "name": "Verify score accessibility for users with color vision deficiency",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Session Management and Persistence",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0014",
+      "name": "Validate accessibility and performance of debug diagnostic display",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0015",
+      "name": "Verify zero-friction, client-side execution of the single-file game architecture",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Browser-Based Deployment Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0016",
+      "name": "Verify that the game remains fully playable using only the primary control scheme (Spacebar/Click) when the vertical dodge feature is active.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Input and Control Responsiveness",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0017",
+      "name": "Verify audio mute toggle functionality during active gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Aesthetic and Audio Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0018",
+      "name": "Verify performance and state management in a client-side browser environment",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Browser-Based Deployment Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0019",
+      "name": "Verify the initiation of a gameplay session via touch/click input",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Core Gameplay Loop and Progression",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0020",
+      "name": "Real-time score updates during active gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Session Management and Persistence",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0021",
+      "name": "Verify that pressing the Up arrow key triggers a vertical dodge maneuver while maintaining core movement consistency.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Input and Control Responsiveness",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0022",
+      "name": "Verify consistency of jump and gravity adjustments across input methods",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0023",
+      "name": "Verify session length monitoring for difficulty curve tuning",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Game Configuration and Balance",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0024",
+      "name": "Verify viewport returns to neutral position after screen shake animation completes",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Aesthetic and Audio Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0025",
+      "name": "Verify session high score updates when a new personal best is achieved during a session.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Session Management and Persistence",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0026",
+      "name": "Verify the session high score is reset upon browser tab refresh.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Session Management and Persistence",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0027",
+      "name": "Display of performance metrics on the Game Over screen",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Develop a single-page, browser-based endless runner arcade game featuring the 'Glitch' character.",
+      "epic": "Session Management and Persistence",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0028",
+      "name": "Verify correct prompt text displays for desktop users",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Cross-Platform Input Integration",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0029",
+      "name": "Verify real-time application of animation constants to dash movement",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0030",
+      "name": "Verify game loop synchronization and smoothness using requestAnimationFrame",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0031",
+      "name": "Validate glitch intensity thresholds for accessibility and performance",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0032",
+      "name": "Verify mobile/tablet touch input mapping for Glitch character Jump action",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Cross-Platform Input Integration",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0033",
+      "name": "Verify desktop input mapping for Glitch character Jump action",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Cross-Platform Input Integration",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0034",
+      "name": "Verify validation logic for configuration interval ranges",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0035",
+      "name": "Verify correct prompt text displays for mobile users",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Cross-Platform Input Integration",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0036",
+      "name": "Verifying particle burst effect during dash execution",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0037",
+      "name": "Verify character vertical velocity updates with near-zero latency under active load.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0038",
+      "name": "Verify input buffering responsiveness for Jump action via Spacebar and Pointerdown",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0039",
+      "name": "Verify game session initiation upon user interaction",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Cross-Platform Input Integration",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0040",
+      "name": "Performance validation of Glitch Dash under high difficulty",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0041",
+      "name": "Verify input state clearance upon Game Over to prevent accidental immediate restart",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0042",
+      "name": "Verify Jump logic executes without heap allocation to prevent GC pauses.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0043",
+      "name": "Triggering the Glitch Dash with single-button input during an Active game state",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Glitch-Themed Movement Mechanics",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0044",
+      "name": "Verify input decoupling from the main rendering thread during high-frequency events",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Implement simple, responsive one-button input mechanics for desktop and mobile devices.",
+      "epic": "Responsive Input Latency Optimization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0045",
+      "name": "Verify difficulty does not exceed Hard Cap limits at high-intensity states",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0046",
+      "name": "Verify that modifications to global difficulty constants immediately impact game mechanics.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0047",
+      "name": "Verify spatial filtering and object culling during gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0048",
+      "name": "Verify movement logic respects hitbox offset within defined tolerance",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0049",
+      "name": "Verify AABB collision detection logic triggers upon hitbox intersection",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0050",
+      "name": "Verify obstacle gap distance reduction as score increases",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0051",
+      "name": "Verify AABB early-out logic for collision checks",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0052",
+      "name": "Verify system monitors collision frequency to detect excessive difficulty levels",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0053",
+      "name": "Verify transition fluidity during speed and obstacle rate increases",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0054",
+      "name": "Verify automatic intensity throttling when frame time exceeds safety threshold",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0055",
+      "name": "Verify live score update and visual compliance during active gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Comprehensive Score Tracking",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0056",
+      "name": "Verify intensity remains at peak difficulty when reaching the Hard Cap",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0057",
+      "name": "Verify high-velocity movement collision detection against thin walls",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0058",
+      "name": "Verify obstacle instance receives correct collision geometry upon spawning",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0059",
+      "name": "Verify difficulty scaling resets upon game restart",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0060",
+      "name": "Verify session-best score persistence across multiple death cycles",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Comprehensive Score Tracking",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0061",
+      "name": "Verify that the game initializes within defined difficulty boundaries to prevent impossible gameplay states.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0062",
+      "name": "Verify difficulty scaling follows a smooth curve instead of abrupt steps",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0063",
+      "name": "Enforce mandatory lockout period after throttle trigger",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0064",
+      "name": "Verify hitbox initialization for game environmental assets",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0065",
+      "name": "Verify difficulty scaling increases speed and obstacle frequency as survival duration increases",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0066",
+      "name": "Verify that all difficulty scaling logic references the centralized constants after deployment.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Dynamic Difficulty Scaling Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0067",
+      "name": "Verify AABB collision detection performance budget",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Precise Collision Detection System",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0068",
+      "name": "Validate intensity controller pause during imminent collision under lag",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0069",
+      "name": "Verify score calculation and display upon player death",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Comprehensive Score Tracking",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0070",
+      "name": "Verify global speed multiplier increases upon reaching score thresholds",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Manage game state including real-time difficulty scaling, collision detection, and score tracking.",
+      "epic": "Automated Intensity Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0071",
+      "name": "Verify typography legibility and interactive element visibility",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Meme-Inspired Visual and Accessibility Design",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0072",
+      "name": "Verify Glitch character performs a cheeky animation upon collision with an obstacle",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Irreverent Content and Interaction Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0073",
+      "name": "Verify animation performance on low-end hardware",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Irreverent Content and Interaction Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0074",
+      "name": "Validate client-side independence and privacy compliance on Chromebook",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Multi-Modal Gameplay Deployment",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0075",
+      "name": "Verify obstacle vs. collectible differentiation using shape and silhouette in greyscale",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Meme-Inspired Visual and Accessibility Design",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0076",
+      "name": "Verify touch control responsiveness and UI scaling on mobile/tablet devices",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Multi-Modal Gameplay Deployment",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0077",
+      "name": "Verify mute toggle functionality",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Punchy Arcade Auditory Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0078",
+      "name": "Verify audio feedback triggers for Jump, Point-scored, and Death states",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Punchy Arcade Auditory Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0079",
+      "name": "Verify quick-break difficulty scaling initialization",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Multi-Modal Gameplay Deployment",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0080",
+      "name": "Verify cheeky message display and UI styling upon collision",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Irreverent Content and Interaction Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0081",
+      "name": "Verify content guidelines for game-over messages",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Irreverent Content and Interaction Engine",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0082",
+      "name": "Verify color palette and visual aesthetic of UI components",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Meme-Inspired Visual and Accessibility Design",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0083",
+      "name": "Verify mute toggle functionality and state persistence during gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Punchy Arcade Auditory Experience",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0084",
+      "name": "Verify large-scale cafeteria projection visual optimization",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Multi-Modal Gameplay Deployment",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0085",
+      "name": "Verify that game state information is not communicated by color alone",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Meme-Inspired Visual and Accessibility Design",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0086",
+      "name": "Validate background asset movement for visual comfort",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Design a high-energy, meme-inspired visual and auditory environment suitable for a school setting.",
+      "epic": "Meme-Inspired Visual and Accessibility Design",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0087",
+      "name": "Verify all game assets are initialized in memory during initial page load",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0088",
+      "name": "Verify the functionality of the instant restart button on the summary screen",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Instant Gameplay Reset",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0089",
+      "name": "Verify spatial collision map clearing and input buffer flush",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Stateful Engine Re-initialization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0090",
+      "name": "Verify state reset and performance continuity after player death",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0091",
+      "name": "Verify zero-latency asset retrieval during game restart",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0092",
+      "name": "Verify primary interaction does not trigger restart during Active gameplay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Streamlined Input Interaction",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0093",
+      "name": "Verify global input listener triggers session restart in Game Over state",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Streamlined Input Interaction",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0094",
+      "name": "Verify that engine-reset clears event listeners and timers while resetting state within performance limits",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Stateful Engine Re-initialization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0095",
+      "name": "Verify reset of dynamic gameplay variables and logic state transition",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Stateful Engine Re-initialization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0096",
+      "name": "Verify memory-safe object pool reset via active flag toggling",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Stateful Engine Re-initialization",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0097",
+      "name": "Verify game loop stability without new object creation",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0098",
+      "name": "Verify state reset and session-based highScore persistence after restart",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Instant Gameplay Reset",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0099",
+      "name": "Verify Game Over summary screen appears with accurate score data after collision",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Instant Gameplay Reset",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0100",
+      "name": "Verify obstacle recycling when objects leave the screen",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0101",
+      "name": "Verify seamless transition from Game Over screen to Active gameplay via primary input",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Instant Gameplay Reset",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0102",
+      "name": "Verify obstacle retrieval and state reset from the pool",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Performance-Optimized Asset Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0103",
+      "name": "Verify 'Restart' UI element triggers session restart",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Provide a frictionless instant-retry mechanic to support rapid gameplay sessions.",
+      "epic": "Streamlined Input Interaction",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0104",
+      "name": "Verify 'highScore' persistence using 'localStorage' without external server communication",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Zero-Dependency Core Application Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0105",
+      "name": "Update high score when current run exceeds previous record",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Local Session Progress Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0106",
+      "name": "Verify that game parameters are configurable and reflected in-game without compilation",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Zero-Dependency Core Application Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0107",
+      "name": "Verify existing high score is correctly retrieved and displayed on Game Over screen",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Local Session Progress Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0108",
+      "name": "Preserve high score when current run does not exceed record",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Local Session Progress Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0109",
+      "name": "Verify zero-dependency offline functionality and source code integrity",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Zero-Dependency Core Application Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0110",
+      "name": "Verify visual theme updates via color constant modification",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Zero-Dependency Core Application Architecture",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0111",
+      "name": "Verify system initializes high score with 0 when localStorage is empty",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Deliver a self-contained, client-side application requiring no login, data collection, or external dependencies.",
+      "epic": "Local Session Progress Management",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0112",
+      "name": "Verify immediate transition to Game Over state upon user input during death animation",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0113",
+      "name": "Verify immediate application of speed_modifier on spawned obstacles",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0114",
+      "name": "Verify score data integrity and persistence when death animation is bypassed",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0115",
+      "name": "Verify dynamic adjustment of gap_size without visual stuttering",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0116",
+      "name": "Validate content filtering for visual aesthetic themes",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0117",
+      "name": "Verify gameplay continuity while using the configuration overlay",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0118",
+      "name": "Verify keyboard input isolation while overlay is active",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0119",
+      "name": "Verify that updating the DEATH_ANIMATION_DURATION constant reflects in the game's death feedback sequence within the specified time limits.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0120",
+      "name": "Verify that the feedback sequence completes within the prescribed time when no user interrupt occurs.",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "",
+      "covered": false,
+      "test_files": []
+    },
+    {
+      "id": "TS-0121",
+      "name": "Verify live palette toggle updates game interface and maintains accessibility standards",
+      "type": "functional",
+      "priority": "medium",
+      "feature": "Configure game parameters for easy adjustments to difficulty, assets, and styling.",
+      "epic": "In-Game Live Configuration Interface",
+      "covered": false,
+      "test_files": []
+    }
+  ],
+  "orphan_test_files": [],
+  "unknown_citations": []
+}
