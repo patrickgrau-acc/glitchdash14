@@ -1,7 +1,6 @@
 /**
  * Toast store — external store for the app's toast/notification surface.
  *
- * INFRASTRUCTURE FILE — DO NOT MODIFY
  * Plain module-scoped state + subscriber list (no React Context, so there
  * is no <ToastProvider> to remember to mount). useToast() subscribes to
  * this store; <ToastViewport> (rendered once, inside MainLayout) reads
@@ -34,7 +33,7 @@ const _listeners = new Set<() => void>();
 const _timers = new Map<string, ReturnType<typeof setTimeout>>();
 
 function _emit(): void {
-  for (const listener of _listeners) listener();
+  _listeners.forEach((listener) => listener());
 }
 
 export function getToasts(): ToastItem[] {
