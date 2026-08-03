@@ -1,11 +1,7 @@
+"use client";
 /**
- * Card — surface container with optional header/title/content/footer.
+ * Card — Shadcn-style surface container.
  * INFRASTRUCTURE FILE — DO NOT MODIFY
- *
- *   <Card>
- *     <CardHeader><CardTitle>Revenue</CardTitle></CardHeader>
- *     <CardContent>...</CardContent>
- *   </Card>
  *
  * @business-card
  * @module Card
@@ -14,21 +10,21 @@
 import React from 'react';
 import { cn } from './cn';
 
-export function Card({ className, hover, ...rest }: React.HTMLAttributes<HTMLDivElement> & { hover?: boolean }) {
-  return <div className={cn('card', hover && 'card-hover', className)} {...rest} />;
+export function Card({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('rounded-lg border bg-card text-card-foreground shadow-sm', className)} {...rest} />;
 }
 export function CardHeader({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('mb-3', className)} {...rest} />;
+  return <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...rest} />;
 }
 export function CardTitle({ className, ...rest }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn('text-base font-semibold', className)} {...rest} />;
+  return <h3 className={cn('text-2xl font-semibold leading-none tracking-tight', className)} {...rest} />;
 }
 export function CardDescription({ className, ...rest }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-sm text-text-muted mt-0.5', className)} {...rest} />;
+  return <p className={cn('text-sm text-muted-foreground', className)} {...rest} />;
 }
 export function CardContent({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('', className)} {...rest} />;
+  return <div className={cn('p-6 pt-0', className)} {...rest} />;
 }
 export function CardFooter({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('mt-4 flex items-center gap-2', className)} {...rest} />;
+  return <div className={cn('flex items-center p-6 pt-0', className)} {...rest} />;
 }
