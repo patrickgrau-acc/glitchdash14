@@ -35,14 +35,15 @@ import s27 from './monitor_performance_for_fairness';
 import s28 from './monitor_player_performance';
 import s29 from './optimize_collision_detection';
 import s30 from './present_session_upon_gameplay';
-import s31 from './retrieve_local_high_score';
-import s32 from './start_initial_gameplay_session';
-import s33 from './store_session_high_score';
-import s34 from './update_persistent_high_score';
-import s35 from './validate_character_obstacle_hitbox';
-import s36 from './view_session_performance_metrics';
+import s31 from './reset_gameplay_state_container';
+import s32 from './retrieve_local_high_score';
+import s33 from './start_initial_gameplay_session';
+import s34 from './store_session_high_score';
+import s35 from './update_persistent_high_score';
+import s36 from './validate_character_obstacle_hitbox';
+import s37 from './view_session_performance_metrics';
 
-const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36];
+const registered: Array<GameSystem | undefined> = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37];
 // Only real GameSystem objects register: an object with at least one of
 // update/render/reset. A default-exported class (typeof 'function') or a
 // bare config object is filtered out so it can never break the loop.
