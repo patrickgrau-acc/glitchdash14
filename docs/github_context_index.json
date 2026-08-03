@@ -1,28 +1,296 @@
 {
-  "version": "1.0",
-  "project": "GlitchDash14",
-  "framework": "nextjs",
-  "files": [
-    {
-      "path": "src/game/types.ts",
-      "description": "Living data model for GlitchDash14 intensity scaling and game mechanics."
-    },
-    {
-      "path": "src/game/engine.ts",
-      "description": "Game loop and system orchestration engine."
-    },
-    {
-      "path": "src/game/control.ts",
-      "description": "Input and control handling for desktop and mobile."
-    },
-    {
-      "path": "src/game/GameCanvas.tsx",
-      "description": "React Canvas integration component for GlitchDash14."
-    }
-  ],
-  "layer7": {
+  "_unclassified": {
     "frontend": {
       "screens": [
+        {
+          "name": "ToastProvider",
+          "file": "src/components/notifications/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Icon",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Card",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardHeader",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardTitle",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardDescription",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardContent",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "CardFooter",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Label",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Badge",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "PageHeader",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Spinner",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Skeleton",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "EmptyState",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Table",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "THead",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TBody",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TR",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TH",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "TD",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Modal",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "IconComponent",
+          "file": "src/components/ui/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "WorkflowProvider",
+          "file": "src/components/workflow/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "WorkflowStepper",
+          "file": "src/components/workflow/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "WorkflowNav",
+          "file": "src/components/workflow/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "WorkflowGate",
+          "file": "src/components/workflow/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Sidebar",
+          "file": "src/components/layout/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/config/navigation",
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "MainLayout",
+          "file": "src/components/layout/index.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/config/navigation",
+            "src/components/ui"
+          ],
+          "prop_interfaces": [],
+          "parent_page_file": "src/index.tsx"
+        },
+        {
+          "name": "Page",
+          "file": "app/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/game/GameCanvas"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "RootLayout",
+          "file": "app/layout.tsx",
+          "type": "component",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/layout",
+            "src/components/notifications"
+          ],
+          "prop_interfaces": []
+        },
         {
           "name": "GlitchDashPage",
           "file": "app/glitch_dash/page.tsx",
@@ -30,6 +298,16 @@
           "api_calls": [],
           "component_imports": [
             "src/game/GameCanvas",
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "DashboardPage",
+          "file": "app/dashboard/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
             "src/components/ui"
           ],
           "prop_interfaces": []
