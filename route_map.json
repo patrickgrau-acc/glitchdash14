@@ -1,0 +1,10 @@
+{
+  "frontend_routes": [
+    {
+      "path": "/",
+      "component": "app/page.tsx",
+      "purpose": "Home",
+      "auth_required": false
+    }
+  ]
+}
