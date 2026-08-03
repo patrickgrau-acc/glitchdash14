@@ -3,8 +3,48 @@
     {
       "path": "/",
       "component": "app/page.tsx",
-      "purpose": "Home",
+      "purpose": "Home / Arcade Entry",
+      "auth_required": false
+    },
+    {
+      "path": "/glitch_dash",
+      "component": "app/glitch_dash/page.tsx",
+      "purpose": "Endless Runner Arcade Game",
+      "auth_required": false
+    },
+    {
+      "path": "/dashboard",
+      "component": "app/dashboard/page.tsx",
+      "purpose": "Scores, Leaderboard & Analytics Dashboard",
       "auth_required": false
     }
+  ],
+  "backend_routes": [],
+  "navigation_links": [
+    {
+      "from": "Sidebar",
+      "to": "/",
+      "link_type": "nav_link"
+    },
+    {
+      "from": "Sidebar",
+      "to": "/glitch_dash",
+      "link_type": "nav_link"
+    },
+    {
+      "from": "Sidebar",
+      "to": "/dashboard",
+      "link_type": "nav_link"
+    },
+    {
+      "from": "Home",
+      "to": "/glitch_dash",
+      "link_type": "button"
+    }
+  ],
+  "routing_issues": [],
+  "recommendations": [
+    "Ensure all navigation paths in src/config/navigation.ts match defined Next.js app router paths exactly.",
+    "Add dedicated backend API endpoints if persistent high scores or server-side leaderboards are needed."
   ]
 }
