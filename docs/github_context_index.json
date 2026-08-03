@@ -326,6 +326,76 @@
           "component_imports": [],
           "prop_interfaces": [],
           "derived": true
+        },
+        {
+          "name": "GameStateIncludingPage",
+          "file": "app/game_state_including/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "DevelopSinglePage",
+          "file": "app/develop_single_page/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "ConfigureGameParametersPage",
+          "file": "app/configure_game_parameters/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "DeliverSelfContainedPage",
+          "file": "app/deliver_self_contained/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "FrictionlessInstantRetryPage",
+          "file": "app/frictionless_instant_retry/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "DesignHighEnergyPage",
+          "file": "app/design_high_energy/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
+        },
+        {
+          "name": "SimpleResponsiveOnePage",
+          "file": "app/simple_responsive_one/page.tsx",
+          "type": "page",
+          "api_calls": [],
+          "component_imports": [
+            "src/components/ui"
+          ],
+          "prop_interfaces": []
         }
       ]
     }
