@@ -1,17 +1,22 @@
 /**
- * Spinner / EmptyState / Skeleton — loading and empty feedback.
+ * Spinner / Skeleton / EmptyState — loading and empty feedback.
  * INFRASTRUCTURE FILE — DO NOT MODIFY
  *
  * @business-card
  * @module States
- * @exports Spinner, EmptyState, Skeleton
+ * @exports Spinner, Skeleton, EmptyState
  */
 import React from 'react';
 import { cn } from './cn';
 import { Icon } from './Icon';
 
 export function Spinner({ className, size }: { className?: string; size?: number | string }) {
-  const sizeClass = size ? `w-${size} h-${size}` : 'w-5 h-5';
+  const sizeClass =
+    size === 'sm' ? 'w-4 h-4'
+    : size === 'md' ? 'w-6 h-6'
+    : size === 'lg' ? 'w-8 h-8'
+    : typeof size === 'number' ? `w-${size} h-${size}`
+    : 'w-5 h-5';
   return (
     <span
       role="status"
@@ -21,8 +26,8 @@ export function Spinner({ className, size }: { className?: string; size?: number
   );
 }
 
-export function Skeleton({ className, size }: { className?: string; size?: number | string }) {
-  return <div className={cn('animate-pulse rounded bg-surface-alt', className)} />;
+export function Skeleton({ className }: { className?: string }) {
+  return <div className={cn('animate-pulse rounded-md bg-muted', className)} />;
 }
 
 export function EmptyState({
@@ -38,12 +43,12 @@ export function EmptyState({
 }) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-12 px-4">
-      <div className="w-12 h-12 rounded-full bg-surface-alt flex items-center justify-center mb-3">
-        <Icon name={icon} className="w-6 h-6 text-text-muted" />
+      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
+        <Icon name={icon} className="w-6 h-6 text-muted-foreground" />
       </div>
-      <h3 className="text-base font-semibold">{title}</h3>
-      {description && <p className="text-sm text-text-muted mt-1 max-w-sm">{description}</p>}
-      {children && <div className="mt-4">{children}</div>}
+      <h3 className="font-semibold mb-1">{title}</h3>
+      {description && <p className="text-sm text-muted-foreground mb-4">{description}</p>}
+      {children}
     </div>
   );
 }
