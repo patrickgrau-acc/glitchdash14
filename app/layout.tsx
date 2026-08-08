@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AlchemyBadge } from '@/components/ui/AlchemyBadge';
 
 // ToastProvider fallback to prevent compilation failure if not exported from notifications component
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
@@ -22,6 +23,7 @@ export default function RootLayout({
         <ToastProvider>
           <>{children}</>
         </ToastProvider>
+        <AlchemyBadge />
       </body>
     </html>
   );
