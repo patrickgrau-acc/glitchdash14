@@ -166,7 +166,7 @@ export default function GameCanvas() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14, background: 'radial-gradient(circle at 50% 30%, #2a0a4a 0%, #0d0221 70%)', color: '#fff', fontFamily: 'ui-monospace, Menlo, monospace' }}>
-      <h1 style={{ margin: 0, letterSpacing: 6, textShadow: '0 0 12px #ff2fd0, 0 0 24px #00f0ff' }}>GLITCHDASH14</h1>
+      <h1 style={{ margin: 0, letterSpacing: 6, textShadow: '0 0 10px #ffffff, 0 0 24px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff' }}>GLITCHDASH14</h1>
       <div style={{ display: 'flex', gap: 26, letterSpacing: 2 }}>
         <span style={{ color: '#ff8ae2' }}>SCORE {score}</span>
         <span style={{ color: '#66f6ff' }}>BEST {best}</span>
