@@ -47,7 +47,7 @@ export default function GameCanvas() {
   const lastRef = useRef<number>(0);
   const [phase, setPhase] = useState<'ready' | 'playing' | 'over'>('ready');
   const [score, setScore] = useState(0);
-  const [best, setBest] = useState<number>(() => loadNumber('best', 0));
+  const [best, setBest] = useState<number>(0);
   // Status panel snapshot — a throttled, read-only mirror of state.data for the
   // DOM panel below. Sampling every ~0.4s (not every frame) keeps this cheap;
   // nothing here feeds back into the canvas render loop.
@@ -56,6 +56,13 @@ export default function GameCanvas() {
   const [liveConfig, setLiveConfig] = useState<Record<string, number>>({ speedModifier: 1, gapSize: 1, gravityMultiplier: 1 });
 
   if (!stateRef.current) stateRef.current = createInitialState(W, H, best);
+
+  // Hydrate best score from localStorage on client only (avoids SSR mismatch)
+  useEffect(() => {
+    const stored = loadNumber('best', 0);
+    setBest(stored);
+    if (stateRef.current) stateRef.current.best = stored;
+  }, []);
 
   const begin = () => {
     const s = stateRef.current!;
